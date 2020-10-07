@@ -14,8 +14,8 @@ public class Game extends Canvas implements Runnable {
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 640;
-	private final int HEIGHT = 480;
+	private final int WIDTH = 320;
+	private final int HEIGHT = 240;
 	private final int SCALE = 1; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;
@@ -78,7 +78,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(new Color(19,19,19));
 		g.fillRect(0,0,getWIDTH(),getHEIGHT());
 		
-		g.setFont(new Font("Arial",Font.BOLD,24));
+		g.setFont(new Font("Arial",Font.BOLD,20));
 		g.setColor(Color.white);
 		g.drawString("Olá Mundo", 50, 50);
 		
