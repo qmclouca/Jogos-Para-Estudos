@@ -61,13 +61,12 @@ public class Game extends Canvas implements Runnable {
 	
 	public void run() {
 		long lastTime = System.nanoTime();
-		double amountOfTicks=60.0; //FPS rate
+		double amountOfTicks=60.0;
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		int frames = 0;
 		double timer = System.currentTimeMillis();
 		
-		//Looping principal do jogo
 		while (isRunning) {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
