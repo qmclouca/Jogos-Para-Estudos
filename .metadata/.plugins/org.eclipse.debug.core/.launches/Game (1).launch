@@ -8,6 +8,6 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="me.rlbpc.graficos.Game"/>
-<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="Graficos"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Graficos"/>
 </launchConfiguration>
