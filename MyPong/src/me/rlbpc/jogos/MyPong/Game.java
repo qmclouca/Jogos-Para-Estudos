@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -13,6 +14,8 @@ public class Game extends Canvas implements Runnable{
 	public final int WIDTH = 240;
 	public final int HEIGHT = 120;
 	public final int SCALE = 4; //Usar o scale para aumentar ou diminuir a janela
+	
+	public BufferedImage layer = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB); //Cria uma layer onde serão renderizados os gráficos
 	
 	public Player player;
 	
@@ -44,8 +47,11 @@ public class Game extends Canvas implements Runnable{
 			this.createBufferStrategy(3);
 			return;
 		}
-		Graphics g = bs.getDrawGraphics();
+		Graphics g = layer.getGraphics(); 
 		player.render(g);
+		g = bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE,null);
+		
 		bs.show();
 		}
 		
