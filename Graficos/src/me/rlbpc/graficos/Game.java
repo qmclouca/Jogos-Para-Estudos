@@ -3,8 +3,8 @@ package me.rlbpc.graficos;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -14,13 +14,28 @@ public class Game extends Canvas implements Runnable {
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 640;
-	private final int HEIGHT = 480;
-	private final int SCALE = 1; //Usar o scale para aumentar ou diminuir a janela
+	private int Ang=90; 
+	private int x=0;
+	private int y=0;
+	private final int WIDTH = 180;
+	private final int HEIGHT = 160;
+	private final int SCALE = 4; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;
+	
+	private SpriteSheet sheet;
+	private BufferedImage[] player;
+	private int frames = 0; // contador de frames
+	private int maxFrames = 5; //de quantos em quantos frames o personagem será animado
+	private int currentAnimation = 0, maxAnimation = 3;
 		
 	public Game() {
+		sheet = new SpriteSheet("/SpriteSheet.png");
+		player = new BufferedImage[4]; //mudar quantidade de players
+		player[0]= sheet.getSprite(0, 0, 16, 16);
+		player[1]= sheet.getSprite(16, 0, 16, 16);
+		player[2]= sheet.getSprite(32, 0, 16, 16);
+		player[3]= sheet.getSprite(48, 0, 16, 16);
 		this.setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_BGR);
@@ -64,30 +79,46 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void tick() {
-		
+		frames++;
+		if(frames > maxFrames) {
+			frames = 0;
+			currentAnimation++;
+			if(currentAnimation > maxAnimation) {
+				currentAnimation = 0;
+			}
+		}
 	}
 	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
-			this.createBufferStrategy(2);//usar de 2 a 3
+			this.createBufferStrategy(3);//usar de 2 a 3
 			return;
 		}
 		Graphics g = image.getGraphics();
 		//PREPARA As IMAGENS PARA SEREM APRESENTADAS
-		g.setColor(new Color(19,19,19));
+		//g.setColor(new Color(19,19,19));
 		g.fillRect(0,0,getWIDTH(),getHEIGHT());
 		
-		g.setFont(new Font("Arial",Font.BOLD,24));
-		g.setColor(Color.white);
-		g.drawString("Olá Mundo", 50, 50);
+		//Renderização do jogo
+		Ang = 0; x = 90; y = 90; //posição do player
+		Graphics2D g2 = (Graphics2D) g; //casting do g para gráficos 2D
+		g2.setColor(new Color(0,0,0,180)); //Fundo, renderizar por ordem de trás para frente 
+		g2.fillRect(0, 0, getWIDTH(), getHEIGHT());
+		g2.rotate(Math.toRadians(Ang),90+8,90+8); //Os ângulos devem ser convertidos em radiandos
+		g2.drawImage(player[currentAnimation], x, y, null);
 		
-		
-		
-		g.setColor(Color.blue);
-		g.fillRect(30, 40, 80, 90);
+		//g2.drawImage(player, x, y, null);
+		//x++;y++;
+		//fim renderização jogo
+		//g.setFont(new Font("Arial",Font.BOLD,24));
+		//g.setColor(Color.white);
+		//g.drawString("Olá Mundo", 50, 50);
+		//g.setColor(Color.blue);
+		//g.fillRect(30, 40, 80, 90);
 		
 		//APRESENTA A IMAGEM NO FRAME
+		g.dispose(); //limpar dados de imagem otimiza a performance
 		g = bs.getDrawGraphics();
 		g.drawImage(image,0,0,getWIDTH()*SCALE,getHEIGHT()*SCALE,null);
 		bs.show();
