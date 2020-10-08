@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>130</x>
+      <y>20</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+[waiting for message]</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
