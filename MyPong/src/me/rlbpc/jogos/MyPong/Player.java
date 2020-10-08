@@ -21,18 +21,17 @@ public class Player {
 		} else if(left) {
 			x--;
 		}
-		
+		//Colisão com as bordas do frame
 		if(x+width > Game.WIDTH) {
 			x = Game.WIDTH - width;
 		} else if(x < 0) { 
 			x = 0;
 		}
-		
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(x,y,40,40);
+		g.fillRect(x,y,width,height);
 	}
 	
 	

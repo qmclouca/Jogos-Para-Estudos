@@ -21,11 +21,13 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public BufferedImage layer = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB); //Cria uma layer onde serão renderizados os gráficos
 	
 	public Player player;
+	public Enemy enemy;
 	
 	public Game() {
 		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		this.addKeyListener(this);
 		player = new Player(100,HEIGHT-5);// -5 é a altura do jogador pois a renderização começa do topo esquerdo do frame
+		enemy = new Enemy(100, 0);
 	}
 	
 	
@@ -45,6 +47,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	//A lógica do jogo fica dentro desta classe tick principal
 	public void tick() {
 		player.tick();
+		enemy.tick();
 	}
 	
 	public void render() {
@@ -57,6 +60,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		g.setColor(Color.black); //limpar o frame para a renderizar a próxima posição
 		g.fillRect(0, 0, WIDTH, HEIGHT); //limpar o frame para a renderizar a próxima posição
 		player.render(g);
+		enemy.render(g);
 		g = bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE,null);
 		
