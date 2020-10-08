@@ -15,19 +15,21 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	
 	public static final long serialVersionUID = 1L;
 	public final static int WIDTH = 240;
-	public final int HEIGHT = 120;
+	public final static int HEIGHT = 120;
 	public final int SCALE = 4; //Usar o scale para aumentar ou diminuir a janela
 	
 	public BufferedImage layer = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB); //Cria uma layer onde serão renderizados os gráficos
 	
-	public Player player;
-	public Enemy enemy;
+	public static Player player;
+	public static Enemy enemy;
+	public static Ball ball;
 	
 	public Game() {
 		this.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		this.addKeyListener(this);
 		player = new Player(100,HEIGHT-5);// -5 é a altura do jogador pois a renderização começa do topo esquerdo do frame
 		enemy = new Enemy(100, 0);
+		ball = new Ball(100, ((HEIGHT/2)-1));
 	}
 	
 	
@@ -48,6 +50,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public void tick() {
 		player.tick();
 		enemy.tick();
+		ball.tick();
 	}
 	
 	public void render() {
@@ -61,9 +64,10 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		g.fillRect(0, 0, WIDTH, HEIGHT); //limpar o frame para a renderizar a próxima posição
 		player.render(g);
 		enemy.render(g);
+		ball.render(g);
 		g = bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE,null);
-		
+		Ball.speed = Ball.speed + 0.0001;
 		bs.show();
 		}
 		

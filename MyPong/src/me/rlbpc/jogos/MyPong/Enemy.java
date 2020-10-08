@@ -9,12 +9,13 @@ public class Enemy {
 	
 	public Enemy(int x, int y) {
 		this.x = x;
-		this.y = y;
+		this.y = y+2;
 		this.width = 40;
 		this.height = 5;
 	}
 	//lógica do inimigo
 	public void tick() {
+		x += (Game.ball.x - x - 3)*0.5;
 	}
 	
 	public void render(Graphics g) {
