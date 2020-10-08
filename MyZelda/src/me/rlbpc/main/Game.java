@@ -76,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		Graphics g = image.getGraphics();
 		//PREPARA As IMAGENS PARA SEREM APRESENTADAS
-		g.setColor(new Color(0,0,255));
+		g.setColor(new Color(0,0,0));
 		g.fillRect(0,0,getWIDTH(),getHEIGHT());
 		
 		//Renderização do jogo

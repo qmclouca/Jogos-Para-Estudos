@@ -6,22 +6,30 @@
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
 		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.newWizard(newWizardId=com.umlet.plugin.wizards.NewWizard)"/>
 			<item value="org.eclipse.epp.mpc.ui.command.showMarketplaceWizard"/>
 			<item value="org.eclipse.debug.ui.commands.DebugLast"/>
 		</list>
 		<list key="orderedProviders">
 			<item value="org.eclipse.ui.commands"/>
 			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textEntries">
 			<item value="1"/>
 			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="textArray">
+			<item value="umlet"/>
 			<item value="market"/>
 			<item value="debug"/>
 		</list>
 	</section>
 	<section name="NewWizardAction">
+	</section>
+	<section name="ImportExportAction">
+	</section>
+	<section name="ZipFileImportWizard">
 	</section>
 </section>

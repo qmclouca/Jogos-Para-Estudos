@@ -5,6 +5,30 @@
 		<item value="github.com"/>
 		<item value="bitbucket.org"/>
 	</list>
+	<list key="CommitDialog.authorValues">
+		<item value="Rodolfo Lucas Bortoluzzi &lt;qmclouca@gmail.com&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="Rodolfo Lucas Bortoluzzi &lt;qmclouca@gmail.com&gt;"/>
+	</list>
 	<section name="GitImportWizard">
+	</section>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="500,500"/>
+		<item key="STAGING_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="sortItemState" value="false"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+	</section>
+	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="633"/>
+		<item key="DIALOG_Y_ORIGIN" value="-39"/>
+		<item key="DIALOG_WIDTH" value="666"/>
+		<item key="DIALOG_HEIGHT" value="458"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		<list key="sashWeights">
+			<item value="600"/>
+			<item value="400"/>
+		</list>
 	</section>
 </section>
