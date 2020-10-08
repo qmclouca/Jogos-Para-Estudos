@@ -15,7 +15,7 @@ public class Enemy {
 	}
 	//lógica do inimigo
 	public void tick() {
-		x += (Game.ball.x - x - 3)*0.5;
+		x += (Game.ball.x - x - 3)*0.3;
 	}
 	
 	public void render(Graphics g) {

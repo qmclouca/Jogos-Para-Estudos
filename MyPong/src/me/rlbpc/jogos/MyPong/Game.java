@@ -67,7 +67,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		ball.render(g);
 		g = bs.getDrawGraphics();
 		g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE,null);
-		Ball.speed = Ball.speed + 0.0001;
+		//Ball.speed = Ball.speed + 0.0001;
 		bs.show();
 		}
 		

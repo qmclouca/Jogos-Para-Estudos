@@ -10,23 +10,23 @@ public class Ball {
 	public int width,height;
 	
 	public double dx,dy; //direções da bola
-	public static double speed = 0.8;
+	public double speed = 1.5;
 	
 	public Ball(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.width = 3;
 		this.height = 3;
-		
-		dx = new Random().nextGaussian();
-		dy = new Random().nextGaussian();
-		
+		int angle = new Random().nextInt(120 - 45) + 45;
+		dx = Math.cos(Math.toRadians(angle));
+		dy = Math.cos(Math.toRadians(angle));		
 	}
 	//lógica do inimigo
 	public void tick() {
 		//colisões com paredes
-		if ((x+dx*speed) + width >= Game.WIDTH) {
+		if ((x+(dx*speed) + width >= Game.WIDTH)) {
 			dx*=-1;
+			
 		} else if (x+(dx*speed) < 0) {
 			dx*=-1;			
 		}
@@ -50,9 +50,16 @@ public class Ball {
 		Rectangle boundsEnemy = new Rectangle((int)Game.enemy.x,(int)Game.enemy.y,Game.enemy.width,Game.enemy.height);
 		
 		if(bounds.intersects(boundsPlayer)) {
-			dy*=-1;
+			int angle = new Random().nextInt(120 - 45) + 45;
+			dx = Math.cos(Math.toRadians(angle));
+			dy = Math.cos(Math.toRadians(angle));
+			if(dy>0) dy*=-1;
 		} else if(bounds.intersects(boundsEnemy)) {
-			dy*=-1;
+			int angle = new Random().nextInt(120 - 45) + 45;
+			dx = Math.cos(Math.toRadians(angle));
+			dy = Math.cos(Math.toRadians(angle));
+			if(dy<0) dy*=-1;
+			
 		}
 		
 		x+=dx*speed;
