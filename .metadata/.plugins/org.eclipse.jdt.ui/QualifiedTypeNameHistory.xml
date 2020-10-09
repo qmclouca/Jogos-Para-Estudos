@@ -4,8 +4,8 @@
 <fullyQualifiedTypeName name="java.awt.Canvas"/>
 <fullyQualifiedTypeName name="java.awt.Dimension"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
-<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 </qualifiedTypeNameHistroy>

@@ -6,8 +6,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
+
+import me.rlbpc.entities.Entity;
+import me.rlbpc.entities.Player;
+import me.rlbpc.graficos.SpriteSheet;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -16,17 +22,25 @@ public class Game extends Canvas implements Runnable {
 	private boolean isRunning = true;
 	private final int WIDTH = 180;
 	private final int HEIGHT = 160;
-	private final int SCALE = 4; //Usar o scale para aumentar ou diminuir a janela
+	private final int SCALE = 3; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;
+	
+	public List<Entity> entities;
+	public SpriteSheet spritesheet;
 			
 	public Game() {
 		this.setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
-		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_BGR);
+		//Inicializando Objetos
+		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
+		entities = new ArrayList<Entity>();
+		spritesheet = new SpriteSheet("/SpriteSheet.png");
+				
+		entities.add(new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16)));
 	}
 	public void initFrame() {
-		setFrame(new JFrame("Primeira Janela do Jogo"));
+		setFrame(new JFrame("MyZelda - Rodolfo Bortoluzzi - Estudo de Games"));
 		getFrame().add(this);
 		getFrame().setResizable(false);
 		getFrame().pack(); //calibra as dimensões do frame usando o canvas
@@ -64,6 +78,10 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void tick() {
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			e.tick();
+		}
 		
 	}
 	
@@ -81,7 +99,10 @@ public class Game extends Canvas implements Runnable {
 		
 		//Renderização do jogo
 		//Graphics2D g2 = (Graphics2D) g; //casting do g para gráficos 2D
-				
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			e.render(g);
+		}
 		//APRESENTA A IMAGEM NO FRAME
 		g.dispose(); //limpar dados de imagem otimiza a performance
 		g = bs.getDrawGraphics();
