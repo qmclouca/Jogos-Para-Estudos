@@ -4,7 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-	private int x,y,width,height;
+	//usar protected para poder usar nas classes derivadas
+	protected int x,y,width,height;
 	
 	private BufferedImage sprite;
 	
@@ -28,16 +29,16 @@ public class Entity {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setX(int newX) {
+		this.x = newX;
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setY(int newY) {
+		this.y = newY;
 	}
 
 	public int getWidth() {
