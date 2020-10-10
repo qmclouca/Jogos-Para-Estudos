@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
+import me.rlbpc.world.Camera;
 
 public class Player extends Entity {
 	
@@ -49,18 +50,22 @@ public class Player extends Entity {
 			moved = true;
 			dir = right_dir;
 			x+=speed;
+		
 		} else if (left) {
 			moved = true;
 			dir = left_dir;
 			x-=speed;
+			
 		} else if (down) {
 			moved = true;
 			dir = up_dir;
-			y-=speed;			
+			y-=speed;
+			
 		} else if (up) {
 			moved = true;
 			dir = down_dir;
 			y+=speed;
+		
 		} /*else if (upleft) {
 			x-=speed;
 			y+=speed;
@@ -84,17 +89,23 @@ public class Player extends Entity {
 				if (index > maxIndex) index = 0;
 			}
 		}
-	}
+		//Código para a câmera acompanhar o jogador e no meio da tela
+		Camera.x = this.getX() - (Game.WIDTH/2);
+		Camera.y = this.getY() - (Game.HEIGHT/2);
+}
+	
+	
+	
 	
 	public void render(Graphics g) {
 		if(dir == right_dir) {
-			g.drawImage(rightPlayer[index], this.getX(), this.getY(), null);
+			g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		} else if (dir == left_dir) {
-			g.drawImage(leftPlayer[index], this.getX(), this.getY(), null);
+			g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		} else if (dir == up_dir) {
-			g.drawImage(upPlayer[index], this.getX(), this.getY(), null);
+			g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		} else if (dir == down_dir) {
-			g.drawImage(downPlayer[index], this.getX(), this.getY(), null);
+			g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 		}
 	}
 }

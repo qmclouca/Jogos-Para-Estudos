@@ -23,8 +23,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 320;
-	private final int HEIGHT = 320;
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = 320;
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;

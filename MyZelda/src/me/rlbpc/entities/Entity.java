@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
+import me.rlbpc.world.Camera;
 
 public class Entity {
 	public static BufferedImage LIVEPACK_EN = Game.spritesheet.getSprite(96,0,16,16);
@@ -54,7 +55,7 @@ public class Entity {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(sprite, this.getX(),this.getY(), null);
+		g.drawImage(sprite, this.getX() - Camera.x,this.getY() - Camera.y, null);
 		g.setColor(Color.RED);
 	
 	}
