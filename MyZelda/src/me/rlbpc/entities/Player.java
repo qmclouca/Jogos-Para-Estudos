@@ -13,7 +13,7 @@ public class Player extends Entity {
 	public int dir = right_dir;
 	
 	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
-	private int frames = 0, maxFrames = 5, index = 0, maxIndex = 3;
+	private int frames = 0, maxFrames = 4, index = 0, maxIndex = 3;
 	private BufferedImage[] rightPlayer;
 	private BufferedImage[] leftPlayer;
 	private BufferedImage[] upPlayer;
@@ -23,6 +23,7 @@ public class Player extends Entity {
 	public Player(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
+		//Carregar as sprites para animação do player
 		rightPlayer = new BufferedImage[4];
 		leftPlayer = new BufferedImage[4];
 		upPlayer = new BufferedImage[4];

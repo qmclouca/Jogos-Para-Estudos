@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import me.rlbpc.entities.Entity;
 import me.rlbpc.entities.Player;
 import me.rlbpc.graficos.SpriteSheet;
+import me.rlbpc.world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +31,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	public List<Entity> entities;
 	public static SpriteSheet spritesheet;
+	public static World world;
 	
 	private Player player;
 			
@@ -38,9 +40,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		this.setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
 		//Inicializando Objetos
+		
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
+		world = new World("/mapa20x20.png");
 		player = new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16));		
 		entities.add(player);
 	}
@@ -98,11 +102,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 		Graphics g = image.getGraphics();
 		//PREPARA As IMAGENS PARA SEREM APRESENTADAS
-		g.setColor(new Color(0,255,0));
+		g.setColor(new Color(35,35,0));
 		g.fillRect(0,0,getWIDTH(),getHEIGHT());
 		
 		//Renderização do jogo
 		//Graphics2D g2 = (Graphics2D) g; //casting do g para gráficos 2D
+		world.render(g);
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.render(g);
