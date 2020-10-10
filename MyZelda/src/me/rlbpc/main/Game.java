@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
-		//Inicializando Objetos
+		//Inicializando Objetos devem obedecer a ordem correta devido ao uso de variáveis estáticas
 		
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
