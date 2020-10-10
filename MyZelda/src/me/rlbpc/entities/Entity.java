@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
 	//usar protected para poder usar nas classes derivadas
-	protected int x,y,width,height;
+	protected double x,y;
+	protected int width,height;
 	
 	private BufferedImage sprite;
 	
@@ -26,7 +27,7 @@ public class Entity {
 	}
 
 	public int getX() {
-		return x;
+		return (int)this.x;
 	}
 
 	public void setX(int newX) {
@@ -34,7 +35,7 @@ public class Entity {
 	}
 
 	public int getY() {
-		return y;
+		return (int)this.y;
 	}
 
 	public void setY(int newY) {

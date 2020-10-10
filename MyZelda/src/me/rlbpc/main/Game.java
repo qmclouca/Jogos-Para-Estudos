@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private BufferedImage image;
 	
 	public List<Entity> entities;
-	public SpriteSheet spritesheet;
+	public static SpriteSheet spritesheet;
 	
 	private Player player;
 			
@@ -155,34 +155,51 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {	
-			System.out.println("Direita");
-			player.right = true;
-		}else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-			System.out.println("Esquerda");
-			player.left = true;
-		}else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_W) {
-			System.out.println("Para cima");
-			player.up = true;
-		}else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_S) {
-			System.out.println("Para baixo");
-			player.down = true;
+		//implementar movimentos diagonais posteriormente criar tabela de estados de teclas e comparar tabelas para verificar qual a combinação de teclas
+		//outra solução é criar um timer e verificar se duas teclas foram pressionadas em um intervalo baixo o suficiente para considerar que é um único evento, é uma solução mais pobre mas consome menos recurso
+		switch(e.getKeyCode()) {
+		  case KeyEvent.VK_UP:
+			  System.out.println("Para baixo");
+				player.down = true;
+		    break;
+		  case KeyEvent.VK_RIGHT:
+			  System.out.println("Direita");
+			  player.right = true;
+		    break;
+		  case KeyEvent.VK_LEFT:
+			  System.out.println("Esquerda");
+				player.left = true;
+			    break;
+		  case KeyEvent.VK_DOWN:
+			  System.out.println("Para cima");
+				player.up = true;
+			    break;
+			    
+		  default:
+		    // code block
 		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {	
-			System.out.println("Soltando Direita");
-			player.right = false;
-		}else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-			System.out.println("Soltando Esquerda");
-			player.left = false;
-		}else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_W) {
-			System.out.println("Soltando Para cima");
-			player.up = false;
-		}else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_S) {
-			System.out.println("Soltando Para baixo");
-			player.down = false;
+		switch(e.getKeyCode()) {
+		  case KeyEvent.VK_UP:
+			  System.out.println("Para baixo");
+				player.down = false;
+		    break;
+		  case KeyEvent.VK_RIGHT:
+			  System.out.println("Direita");
+			  player.right = false;
+		    break;
+		  case KeyEvent.VK_LEFT:
+			  System.out.println("Esquerda");
+				player.left = false;
+			    break;
+		  case KeyEvent.VK_DOWN:
+			  System.out.println("Para cima");
+				player.up = false;
+			    break;
+		   default:
+		    // code block
 		}
 		
 	}
