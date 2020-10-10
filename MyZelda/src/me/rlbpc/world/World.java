@@ -6,8 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import me.rlbpc.entities.Enemy;
-import me.rlbpc.entities.Entity;
+import me.rlbpc.entities.*;
 import me.rlbpc.main.Game;
 
 public class World {
@@ -43,6 +42,7 @@ public class World {
 					break;
 					case 0xFF834900: 
 						//Arma
+						Game.entities.add(new Weapon(xx*16,yy*16,16,16,Entity.WEAPON_EN));
 					break;
 					case 0xFF792300:
 						//INIMIGO
@@ -50,9 +50,11 @@ public class World {
 					break;
 					case 0xFF701B79: 
 						//VIDA
+						Game.entities.add(new LifePack(xx*16,yy*16,16,16,Entity.LIVEPACK_EN));
 					break;
 					case 0xFFA18C00:
 						//BULLET
+						Game.entities.add(new Bullet(xx*16,yy*16,16,16,Entity.BULLET_EN));
 					break;
 					default:
 						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
