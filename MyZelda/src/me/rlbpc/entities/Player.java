@@ -13,7 +13,7 @@ public class Player extends Entity {
 	public int dir = right_dir;
 	
 	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
-	private int frames = 0, maxFrames = 4, index = 0, maxIndex = 3;
+	private int frames = 0, maxFrames = 6, index = 0, maxIndex = 3;
 	private BufferedImage[] rightPlayer;
 	private BufferedImage[] leftPlayer;
 	private BufferedImage[] upPlayer;
@@ -32,10 +32,10 @@ public class Player extends Entity {
 			rightPlayer[i] = Game.spritesheet.getSprite(32+(i*16),17,16,16);
 		}
 		for (int i = 0; i < 4; i++) {
-			leftPlayer[i] = Game.spritesheet.getSprite(80-(i*16),34,16,16);
+			leftPlayer[i] = Game.spritesheet.getSprite(32+(i*16),34,16,16);
 		}
 		for (int i = 0; i < 4; i++) {	
-			upPlayer[i] = Game.spritesheet.getSprite(48+(i*16),0,16,16);
+			upPlayer[i] = Game.spritesheet.getSprite(32+(i*16),52,16,16);
 		}
 		for (int i = 0; i < 4; i++) {
 			downPlayer[i] = Game.spritesheet.getSprite(32+(i*16),0,16,16);
