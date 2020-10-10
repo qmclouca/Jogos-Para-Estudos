@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import me.rlbpc.entities.Enemy;
+import me.rlbpc.entities.Entity;
 import me.rlbpc.main.Game;
 
 public class World {
@@ -44,14 +46,17 @@ public class World {
 					break;
 					case 0xFF792300:
 						//INIMIGO
+						Game.entities.add(new Enemy(xx*16,yy*16,16,16,Entity.ENEMY_EN));
 					break;
 					case 0xFF701B79: 
 						//VIDA
 					break;
-					case 0xFFA79100:
+					case 0xFFA18C00:
 						//BULLET
 					break;
 					default:
+						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
+					break;
 					}
 				}
 			}

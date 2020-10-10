@@ -29,15 +29,17 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	
 	private BufferedImage image;
 	
-	public List<Entity> entities;
+	public static List<Entity> entities;
+	
 	public static SpriteSheet spritesheet;
+	
 	public static World world;
 	
 	public static Player player;
 			
 	public Game() {
 		addKeyListener(this);
-		this.setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
+		setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
 		//Inicializando Objetos devem obedecer a ordem correta devido ao uso de variáveis estáticas
 		
@@ -47,18 +49,17 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		player = new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16));
 		entities.add(player);
 		world = new World("/mapa20x20.png");
-				
-		
-		
+	
 	}
+	
 	public void initFrame() {
-		setFrame(new JFrame("MyZelda - Rodolfo Bortoluzzi - Estudo de Games"));
-		getFrame().add(this);
-		getFrame().setResizable(false);
-		getFrame().pack(); //calibra as dimensões do frame usando o canvas
-		getFrame().setLocationRelativeTo(null);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getFrame().setVisible(true);
+		frame = new JFrame("MyZelda - Rodolfo Bortoluzzi - Estudo de Games");
+		frame.add(this);
+		frame.setResizable(false);
+		frame.pack(); //calibra as dimensões do frame usando o canvas
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 	public synchronized void start() {
 		thread = new Thread(this);
@@ -80,7 +81,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		Game game = new Game();
 		game.start();
 	}
-
+/*
 	public static JFrame getFrame() {
 		return frame;
 	}
@@ -88,7 +89,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static void setFrame(JFrame frame) {
 		Game.frame = frame;
 	}
-
+*/
 	public void tick() {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
