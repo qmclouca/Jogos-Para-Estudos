@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import me.rlbpc.main.Game;
+
 public class World {
 	
 	private Tile[] tiles;
@@ -22,19 +24,34 @@ public class World {
 			for (int xx = 0; xx < map.getWidth(); xx++) {
 				for(int yy = 0; yy< map.getWidth(); yy++) {
 					int pixelAtual = pixels[xx + (yy*map.getWidth())];
-					
-					if (pixelAtual == 0xFF353500) {
-						//Chão
+					tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
+					switch (pixelAtual) {
+					case 0xFF353500:
+						//FLOOR
 						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
-					} else if(pixelAtual == 0xFFFFFFFF) {
+					break;
+					case 0xFFFFFFFF:
 						//Parede
 						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_WALL);
-					} else if(pixelAtual == 0xFF0026FF) { 
+					break;
+					case 0xFF0026FF:
 						//Player
-						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
-					} else {
-						//Chão
-						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
+						Game.player.setX(xx*16);
+						Game.player.setY(yy*16);
+					break;
+					case 0xFF834900: 
+						//Arma
+					break;
+					case 0xFF792300:
+						//INIMIGO
+					break;
+					case 0xFF701B79: 
+						//VIDA
+					break;
+					case 0xFFA79100:
+						//BULLET
+					break;
+					default:
 					}
 				}
 			}

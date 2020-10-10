@@ -23,8 +23,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	private final int WIDTH = 240;
-	private final int HEIGHT = 160;
+	private final int WIDTH = 320;
+	private final int HEIGHT = 320;
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;
@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static SpriteSheet spritesheet;
 	public static World world;
 	
-	private Player player;
+	public static Player player;
 			
 	public Game() {
 		addKeyListener(this);
@@ -44,9 +44,12 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
-		world = new World("/mapa20x20.png");
-		player = new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16));		
+		player = new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16));
 		entities.add(player);
+		world = new World("/mapa20x20.png");
+				
+		
+		
 	}
 	public void initFrame() {
 		setFrame(new JFrame("MyZelda - Rodolfo Bortoluzzi - Estudo de Games"));
