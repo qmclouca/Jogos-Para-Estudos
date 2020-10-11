@@ -15,6 +15,8 @@ public class Enemy extends Entity {
 	 */
 	public static double atenuadorDeInimigo1 = 0.8; 
 	private double speed = Player.speed*atenuadorDeInimigo1;
+	//tamanho da máscara de colisão do inimigo
+	private int maskx = 8, masky = 8, maskw = 7, maskh = 8;
 	
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
@@ -24,7 +26,6 @@ public class Enemy extends Entity {
 	
 			if(x < Game.player.getX() && World.isFree((int)(x+speed), this.getY()) 
 					&& !isColidding((int)(x+speed), this.getY())) {
-				
 				x+=speed;
 			} else if (x > Game.player.getX() && World.isFree((int)(x-speed), this.getY())
 					&& !isColidding((int)(x-speed), this.getY())) {
@@ -41,11 +42,11 @@ public class Enemy extends Entity {
 	
 	//Checa se os inimigos estão colidindo
 	public boolean isColidding(int xNext, int yNext) {
-		Rectangle enemyCurrent = new Rectangle(xNext, yNext,Game.xyPixelsByTile,Game.xyPixelsByTile);
+		Rectangle enemyCurrent = new Rectangle(xNext + maskx, yNext + masky,maskw,maskh);
 		for (int i = 0; i < Game.enemies.size(); i++) {
 			Enemy e = Game.enemies.get(i);
 			if(e== this) continue;
-			Rectangle targetEnemy = new Rectangle(e.getX(), e.getY(),Game.xyPixelsByTile,Game.xyPixelsByTile);
+			Rectangle targetEnemy = new Rectangle(e.getX() + maskx, e.getY() + masky,maskw,maskh);
 			if (enemyCurrent.intersects(targetEnemy)) {
 				return true;		
 			}
@@ -58,7 +59,7 @@ public class Enemy extends Entity {
 	public void render (Graphics g) {
 		super.render(g);
 		g.setColor(Color.BLUE);
-		g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, Game.xyPixelsByTile, Game.xyPixelsByTile);
+		g.fillRect(this.getX() +maskx - Camera.x, this.getY() + masky - Camera.y, maskw,  maskh);
 	}*/
 	}
 
