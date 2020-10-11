@@ -3,6 +3,7 @@ package me.rlbpc.entities;
 import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
+import me.rlbpc.world.World;
 
 public class Enemy extends Entity {
 
@@ -13,14 +14,14 @@ public class Enemy extends Entity {
 	}
 	
 	public void tick() {
-		if(x < Game.player.getX()) {
+		if(x < Game.player.getX() && World.isFree((int)(x+speed), this.getY())) {
 			x+=speed;
-		} else if (x > Game.player.getX()) {
+		} else if (x > Game.player.getX() && World.isFree((int)(x-speed), this.getY())) {
 			x-=speed;
 		}
-		if(y < Game.player.getY()) {
+		if(y < Game.player.getY() && World.isFree(this.getX(), (int)(y+speed))) {
 			y+=speed;
-		} else if (y > Game.player.getY()) {
+		} else if (y > Game.player.getY() && World.isFree(this.getX(), (int)(y-speed))) {
 			y-=speed;
 		}
 	}
