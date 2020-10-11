@@ -46,7 +46,10 @@ public class World {
 					break;
 					case 0xFF792300:
 						//INIMIGO
-						Game.entities.add(new Enemy(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.ENEMY_EN));
+						Enemy inimigo = new Enemy(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.ENEMY_EN);
+						Game.entities.add(inimigo);
+						//lista de inimigos para checagem de colisões entre inimigos
+						Game.enemies.add(inimigo);
 					break;
 					case 0xFF701B79: 
 						//VIDA

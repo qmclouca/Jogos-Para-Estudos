@@ -14,6 +14,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import me.rlbpc.entities.Enemy;
 import me.rlbpc.entities.Entity;
 import me.rlbpc.entities.Player;
 import me.rlbpc.graficos.SpriteSheet;
@@ -30,6 +31,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	private BufferedImage image;
 	public static List<Entity> entities;
+	public static List<Enemy> enemies;
 	public static SpriteSheet spritesheet;
 	public static World world;
 	public static Player player;
@@ -45,6 +47,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
+		enemies = new ArrayList<Enemy>();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
 		player = new Player(0,0,xyPixelsByTile,xyPixelsByTile,spritesheet.getSprite(32,0,xyPixelsByTile,xyPixelsByTile));
 		entities.add(player);
