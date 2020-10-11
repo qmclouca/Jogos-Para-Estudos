@@ -10,6 +10,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -27,18 +28,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = 160;
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
-	
 	private BufferedImage image;
-	
 	public static List<Entity> entities;
-	
 	public static SpriteSheet spritesheet;
-	
 	public static World world;
-	
 	public static Player player;
-			
+	public static Random rand;		
+	
+	
 	public Game() {
+		rand = new Random();
 		addKeyListener(this);
 		setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
