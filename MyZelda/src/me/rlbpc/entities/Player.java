@@ -31,13 +31,13 @@ public class Player extends Entity {
 		upPlayer = new BufferedImage[4];
 		downPlayer = new BufferedImage[4];
 		for (int i = 0; i < 4; i++) {
-			rightPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),17,Game.xyPixelsByTile,Game.xyPixelsByTile);
+			rightPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {
-			leftPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),34,Game.xyPixelsByTile,Game.xyPixelsByTile);
+			leftPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),32,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {	
-			upPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),52,Game.xyPixelsByTile,Game.xyPixelsByTile);
+			upPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),48,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {
 			downPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),0,Game.xyPixelsByTile,Game.xyPixelsByTile);
@@ -47,22 +47,22 @@ public class Player extends Entity {
 	public void tick() {
 		moved = false;
 			
-		if (right) {
+		if (right && World.isFree((int)(x+speed),this.getY())) {
 			moved = true;
 			dir = right_dir;
 			x+=speed;
 		
-		} else if (left) {
+		} else if (left && World.isFree((int)(x-speed),this.getY())) {
 			moved = true;
 			dir = left_dir;
 			x-=speed;
 			
-		} else if (down) {
+		} else if (down && World.isFree(this.getX(),(int)(y-speed))) {
 			moved = true;
 			dir = up_dir;
 			y-=speed;
 			
-		} else if (up) {
+		} else if (up && World.isFree(this.getX(),(int)(y+speed))) {
 			moved = true;
 			dir = down_dir;
 			y+=speed;
@@ -94,9 +94,6 @@ public class Player extends Entity {
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
 }
-	
-	
-	
 	
 	public void render(Graphics g) {
 		if(dir == right_dir) {

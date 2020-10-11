@@ -24,7 +24,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private Thread thread;
 	private boolean isRunning = true;
 	public static final int xyPixelsByTile = 16;
-	public static final int WIDTH = 220;
+	public static final int WIDTH = 160;
 	public static final int HEIGHT = 160;
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	
@@ -169,7 +169,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		//outra solução é criar um timer e verificar se duas teclas foram pressionadas em um intervalo baixo o suficiente para considerar que é um único evento, é uma solução mais pobre mas consome menos recurso
 		switch(e.getKeyCode()) {
 		  case KeyEvent.VK_UP:
-			  System.out.println("Para baixo");
+			  System.out.println("Para cima");
 				player.down = true;
 		    break;
 		  case KeyEvent.VK_RIGHT:
@@ -181,35 +181,28 @@ public class Game extends Canvas implements Runnable, KeyListener {
 				player.left = true;
 			    break;
 		  case KeyEvent.VK_DOWN:
-			  System.out.println("Para cima");
+			  System.out.println("Para baixo");
 				player.up = true;
 			    break;
-			    
-		  default:
-		    // code block
+		  
 		}
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		  case KeyEvent.VK_UP:
-			  System.out.println("Para baixo");
-				player.down = false;
+			  player.down = false;
 		    break;
 		  case KeyEvent.VK_RIGHT:
-			  System.out.println("Direita");
 			  player.right = false;
 		    break;
 		  case KeyEvent.VK_LEFT:
-			  System.out.println("Esquerda");
-				player.left = false;
+			  player.left = false;
 			    break;
 		  case KeyEvent.VK_DOWN:
-			  System.out.println("Para cima");
-				player.up = false;
+			  player.up = false;
 			    break;
-		   default:
-		    // code block
+		  
 		}
 		
 	}
