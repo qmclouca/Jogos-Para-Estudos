@@ -10,7 +10,7 @@ import me.rlbpc.world.World;
 public class Player extends Entity {
 	
 	public boolean right,up,left,down,upleft,upright,downleft,downright, moved = false;
-	public double speed = 1.2;
+	public static double speed = 1.2;
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
 	public int dir = right_dir;
 	
@@ -51,18 +51,18 @@ public class Player extends Entity {
 			moved = true;
 			dir = right_dir;
 			x+=speed;
-		
-		} else if (left && World.isFree((int)(x-speed),this.getY())) {
+		} 
+		if (left && World.isFree((int)(x-speed),this.getY())) {
 			moved = true;
 			dir = left_dir;
 			x-=speed;
-			
-		} else if (down && World.isFree(this.getX(),(int)(y-speed))) {
+		} 
+		if (down && World.isFree(this.getX(),(int)(y-speed))) {
 			moved = true;
 			dir = up_dir;
 			y-=speed;
-			
-		} else if (up && World.isFree(this.getX(),(int)(y+speed))) {
+		} 
+		if (up && World.isFree(this.getX(),(int)(y+speed))) {
 			moved = true;
 			dir = down_dir;
 			y+=speed;

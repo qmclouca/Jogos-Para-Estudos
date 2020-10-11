@@ -131,7 +131,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		double delta = 0;
 		int frames = 0;
 		double timer = System.currentTimeMillis();
-		
+		requestFocus();
 		//Looping principal do jogo
 		while (isRunning) {
 			long now = System.nanoTime();
