@@ -23,8 +23,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 320;
+	public static final int xyPixelsByTile = 16;
+	public static final int WIDTH = 220;
+	public static final int HEIGHT = 160;
 	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	
 	private BufferedImage image;
@@ -46,7 +47,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
-		player = new Player(0,0,16,16,spritesheet.getSprite(32,0,16,16));
+		player = new Player(0,0,xyPixelsByTile,xyPixelsByTile,spritesheet.getSprite(32,0,xyPixelsByTile,xyPixelsByTile));
 		entities.add(player);
 		world = new World("/mapa20x20.png");
 	

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
 import me.rlbpc.world.Camera;
+import me.rlbpc.world.World;
 
 public class Player extends Entity {
 	
@@ -30,16 +31,16 @@ public class Player extends Entity {
 		upPlayer = new BufferedImage[4];
 		downPlayer = new BufferedImage[4];
 		for (int i = 0; i < 4; i++) {
-			rightPlayer[i] = Game.spritesheet.getSprite(32+(i*16),17,16,16);
+			rightPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),17,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {
-			leftPlayer[i] = Game.spritesheet.getSprite(32+(i*16),34,16,16);
+			leftPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),34,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {	
-			upPlayer[i] = Game.spritesheet.getSprite(32+(i*16),52,16,16);
+			upPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),52,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 		for (int i = 0; i < 4; i++) {
-			downPlayer[i] = Game.spritesheet.getSprite(32+(i*16),0,16,16);
+			downPlayer[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),0,Game.xyPixelsByTile,Game.xyPixelsByTile);
 		}
 	}
 	
@@ -89,9 +90,9 @@ public class Player extends Entity {
 				if (index > maxIndex) index = 0;
 			}
 		}
-		//Código para a câmera acompanhar o jogador e no meio da tela
-		Camera.x = this.getX() - (Game.WIDTH/2);
-		Camera.y = this.getY() - (Game.HEIGHT/2);
+		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
+		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
+		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
 }
 	
 	

@@ -8,10 +8,10 @@ import me.rlbpc.main.Game;
 import me.rlbpc.world.Camera;
 
 public class Entity {
-	public static BufferedImage LIVEPACK_EN = Game.spritesheet.getSprite(96,0,16,16);
-	public static BufferedImage WEAPON_EN = Game.spritesheet.getSprite(112,0,16,16);
-	public static BufferedImage BULLET_EN = Game.spritesheet.getSprite(97,16,16,16);
-	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(112,16,16,16);
+	public static BufferedImage LIVEPACK_EN = Game.spritesheet.getSprite(96,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage WEAPON_EN = Game.spritesheet.getSprite(112,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage BULLET_EN = Game.spritesheet.getSprite(97,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(112,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	//usar protected para poder usar nas classes derivadas
 	protected double x,y;
 	protected int width,height;

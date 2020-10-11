@@ -7,8 +7,8 @@ import me.rlbpc.main.Game;
 
 //Objetos estáticos do cenário (variáveis do tipo static inicializam apenas uma vez)
 public class Tile {
-	public static BufferedImage  TILE_FLOOR = Game.spritesheet.getSprite(0,0,16,16);
-	public static BufferedImage  TILE_WALL = Game.spritesheet.getSprite(16,0,16,16);
+	public static BufferedImage  TILE_FLOOR = Game.spritesheet.getSprite(0,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage  TILE_WALL = Game.spritesheet.getSprite(16,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	
 	private BufferedImage sprite;
 	private int x, y;
