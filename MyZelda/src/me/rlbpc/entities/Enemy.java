@@ -1,9 +1,12 @@
 package me.rlbpc.entities;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
+import me.rlbpc.world.Camera;
 import me.rlbpc.world.World;
 
 public class Enemy extends Entity {
@@ -50,5 +53,12 @@ public class Enemy extends Entity {
 		
 		return false;
 	}
+	//descomentar para ver a máscara de colisão
+	/*
+	public void render (Graphics g) {
+		super.render(g);
+		g.setColor(Color.BLUE);
+		g.fillRect(this.getX() - Camera.x, this.getY() - Camera.y, Game.xyPixelsByTile, Game.xyPixelsByTile);
+	}*/
 	}
 
