@@ -18,6 +18,7 @@ import me.rlbpc.entities.Enemy;
 import me.rlbpc.entities.Entity;
 import me.rlbpc.entities.Player;
 import me.rlbpc.graficos.SpriteSheet;
+import me.rlbpc.graficos.UI;
 import me.rlbpc.world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener {
@@ -37,7 +38,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static Player player;
 	public static Random rand;	
 	
-	
+	public UI ui; //declara uma ui do tipo UI
 	
 	public Game() {
 		rand = new Random();
@@ -45,7 +46,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
 		//Inicializando Objetos devem obedecer a ordem correta devido ao uso de variáveis estáticas
-		
+		ui = new UI(); //inicializa uma nova User Interface
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		enemies = new ArrayList<Enemy>();
@@ -120,6 +121,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			Entity e = entities.get(i);
 			e.render(g);
 		}
+		ui.render(g);
 		//APRESENTA A IMAGEM NO FRAME
 		g.dispose(); //limpar dados de imagem otimiza a performance
 		g = bs.getDrawGraphics();

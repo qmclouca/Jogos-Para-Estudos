@@ -13,7 +13,7 @@ public class Player extends Entity {
 	public static double speed = 1.2;
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
 	public int dir = right_dir;
-	public static int life = 100;
+	public static double life = 100, maxLife = 100;
 	
 	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
 	private int frames = 0, index = 0, maxFrames = 5, maxIndex = 3;
