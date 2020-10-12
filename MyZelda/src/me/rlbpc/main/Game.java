@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static final int xyPixelsByTile = 16;
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = 160;
-	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
+	private final int SCALE = 3; //Usar o scale para aumentar ou diminuir a janela
 	private BufferedImage image;
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;

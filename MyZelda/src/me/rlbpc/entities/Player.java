@@ -12,7 +12,7 @@ public class Player extends Entity {
 	public boolean right,up,left,down,upleft,upright,downleft,downright, moved = false;
 	public static double speed = 1.2;
 	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
-	public int dir = right_dir;
+	public int dir = right_dir, ammo = 0;
 	public static double life = 100, maxLife = 100;
 	
 	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
@@ -92,10 +92,30 @@ public class Player extends Entity {
 			}
 		}
 	chekCollisionLifePack();
+	chekCollisionAmmo();
 		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
 }
+	
+	
+	public void chekCollisionAmmo(){
+		for (int i = 0; i< Game.entities.size(); i++){
+			Entity atual = Game.entities.get(i);
+				if(atual instanceof Bullet){
+					if(Entity.isColidding(this, atual)) {
+						ammo += 10;
+						System.out.println("Munição: " + ammo);
+						if (life >= 100) life = 100;
+						Game.entities.remove(atual);
+				}
+			}
+		}
+	}
+	
+	
+	
+	
 	public void chekCollisionLifePack(){
 		for (int i = 0; i< Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);

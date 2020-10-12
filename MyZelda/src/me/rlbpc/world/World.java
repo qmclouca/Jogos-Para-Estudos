@@ -53,13 +53,15 @@ public class World {
 					break;
 					case 0xFF701B79: 
 						//VIDA
-						LifePack pack = new LifePack(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.LIVEPACK_EN);
-						//pack.setMask(3, 0, 8, 8);
-						Game.entities.add(pack);
+						LifePack livePack = new LifePack(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.LIVEPACK_EN);
+						//livepack.setMask(3, 0, 8, 8);
+						Game.entities.add(livePack);
 					break;
 					case 0xFFA18C00:
 						//BULLET
-						Game.entities.add(new Bullet(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.BULLET_EN));
+						Bullet bulletPack = new Bullet(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.BULLET_EN);
+						//bulletPack.setMask(3,0,8,8);
+						Game.entities.add(bulletPack);
 					break;
 					default:
 						tiles[xx + (yy*WIDTH)] = new FloorTile(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Tile.TILE_FLOOR);
