@@ -53,7 +53,9 @@ public class World {
 					break;
 					case 0xFF701B79: 
 						//VIDA
-						Game.entities.add(new LifePack(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.LIVEPACK_EN));
+						LifePack pack = new LifePack(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.LIVEPACK_EN);
+						//pack.setMask(3, 0, 8, 8);
+						Game.entities.add(pack);
 					break;
 					case 0xFFA18C00:
 						//BULLET

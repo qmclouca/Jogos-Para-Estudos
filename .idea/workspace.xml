@@ -19,7 +19,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9eebe52-e8ba-4e66-8e84-4dc39c846d88" name="Default Changelist" comment="Preparando o projeto para ser editado no IntelliJ" />
+    <list default="true" id="d9eebe52-e8ba-4e66-8e84-4dc39c846d88" name="Default Changelist" comment="Limpando o código">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/version.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/graficos/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/graficos/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/world/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyZelda/src/me/rlbpc/world/World.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +50,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -53,13 +71,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -78,7 +98,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1602507299082</updated>
-      <workItem from="1602507300220" duration="689000" />
+      <workItem from="1602507300220" duration="1391000" />
+      <workItem from="1602509952173" duration="1745000" />
     </task>
     <task id="LOCAL-00001" summary="Preparando o projeto para ser editado no IntelliJ">
       <created>1602507969928</created>
@@ -87,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602507969928</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Limpando o código">
+      <created>1602508470321</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602508470321</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,15 +131,49 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Preparando o projeto para ser editado no IntelliJ" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preparando o projeto para ser editado no IntelliJ" />
+    <MESSAGE value="Limpando o código" />
+    <option name="LAST_COMMIT_MESSAGE" value="Limpando o código" />
   </component>
   <component name="WindowStateProjectService">
     <state x="805" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602507320536">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="805" y="183" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602507320536" />
+    <state width="914" height="106" key="GridCell.Tab.0.bottom" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.0.center" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.0.left" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.0.right" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.1.bottom" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.1.center" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.1.left" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
+    <state width="914" height="106" key="GridCell.Tab.1.right" timestamp="1602521615427">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="914" height="106" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1602521615427" />
   </component>
 </project>

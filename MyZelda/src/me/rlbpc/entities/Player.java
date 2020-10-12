@@ -91,10 +91,23 @@ public class Player extends Entity {
 				if (index > maxIndex) index = 0;
 			}
 		}
+	chekCollisionLifePack();
 		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
 }
+	public void chekCollisionLifePack(){
+		for (int i = 0; i< Game.entities.size(); i++){
+			Entity atual = Game.entities.get(i);
+				if(atual instanceof LifePack){
+					if(Entity.isColidding(this, atual)) {
+						life += 10;
+						if (life >= 100) life = 100;
+						Game.entities.remove(atual);
+				}
+			}
+		}
+	}
 	
 	public void render(Graphics g) {
 		if(dir == right_dir) {
