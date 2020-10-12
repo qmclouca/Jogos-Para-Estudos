@@ -19,7 +19,7 @@ public class UI {
 		g.fillRect(10, 2, 50,10);
 		g.setColor(Color.GREEN);
 		g.fillRect(10, 2, (int)((Game.player.life/Game.player.maxLife)*50),10);
-		g.setColor(Color.WHITE.darker());
+		g.setColor(Color.WHITE);
 		g.setFont(new Font("arial",Font.BOLD,9));
 		g.drawString((int)Game.player.life+" / "+(int)Game.player.maxLife, 10, 10);
 		

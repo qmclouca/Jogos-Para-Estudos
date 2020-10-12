@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/jogos.iml" filepath="$PROJECT_DIR$/.idea/jogos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Graficos/Graficos.iml" filepath="$PROJECT_DIR$/Graficos/Graficos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LogicaDeGames/LogicaDeGames.iml" filepath="$PROJECT_DIR$/LogicaDeGames/LogicaDeGames.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyPong/MyPong.iml" filepath="$PROJECT_DIR$/MyPong/MyPong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyZelda/MyZelda.iml" filepath="$PROJECT_DIR$/MyZelda/MyZelda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/games_estudos/games_estudos.iml" filepath="$PROJECT_DIR$/games_estudos/games_estudos.iml" />
     </modules>
   </component>
 </project>
