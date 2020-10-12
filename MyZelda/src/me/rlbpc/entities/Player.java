@@ -2,7 +2,9 @@ package me.rlbpc.entities;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import me.rlbpc.graficos.SpriteSheet;
 import me.rlbpc.main.Game;
 import me.rlbpc.world.Camera;
 import me.rlbpc.world.World;
@@ -102,6 +104,17 @@ public class Player extends Entity {
 		if (this.damageFrames == 2) {
 			this.damageFrames = 0;
 			isDamaged = false;
+		}
+		
+		if (life <= 0) {
+			Game.entities = new ArrayList<Entity>();
+			Game.enemies = new ArrayList<Enemy>();
+			Game.spritesheet = new SpriteSheet("/SpriteSheet.png");
+			Game.player = new Player(0,0,Game.xyPixelsByTile,Game.xyPixelsByTile,Game.spritesheet.getSprite(32,0,Game.xyPixelsByTile,Game.xyPixelsByTile));
+			Game.entities.add(Game.player);
+			Game.world = new World("/mapa20x20.png");
+			life = 100;
+			return;
 		}
 	}
 		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
