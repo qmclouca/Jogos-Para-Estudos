@@ -35,7 +35,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static SpriteSheet spritesheet;
 	public static World world;
 	public static Player player;
-	public static Random rand;		
+	public static Random rand;	
+	
 	
 	
 	public Game() {

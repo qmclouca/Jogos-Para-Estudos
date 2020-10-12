@@ -15,10 +15,11 @@ public class Enemy extends Entity {
 	public static double atenuadorDeInimigo1 = 0.4; 
 	private double speed = Player.speed*atenuadorDeInimigo1;
 	//tamanho da máscara de colisão do inimigo
-	private int maskx = 8, masky = 8, maskw = 7, maskh = 9;
+	private int maskxenemy = 8, maskyenemy = 8, maskwenemy = 7, maskhenemy = 8; //ajuste do tamanho da máscara de colisão do inimigo
+	private int maskxplayer = 8, maskyplayer = 8, maskwplayer = 6, maskhplayer = 8; //ajuste do tamanho da máscara de colisão do player
 	private int frames = 0, index = 0, maxFrames = 20, maxIndex = 1;
 	private BufferedImage[] sprites;
-
+	
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, null);
 		sprites = new BufferedImage[2];
@@ -27,7 +28,8 @@ public class Enemy extends Entity {
 	}
 	
 	public void tick() {
-	
+			
+		if (this.isColiddingWithPlayer() == false ) {
 			if(x < Game.player.getX() && World.isFree((int)(x+speed), this.getY()) 
 					&& !isColidding((int)(x+speed), this.getY())) {
 				x+=speed;
@@ -48,15 +50,32 @@ public class Enemy extends Entity {
 					index++;
 					if (index > maxIndex) index = 0;
 				}
+		} else {
+			//código perda de vida
+			if(Game.rand.nextInt(100) < 10) {
+				Game.player.life -= Game.rand.nextInt(4);
+				System.out.println("Vida: " + Game.player.life);
+				if (Game.player.life <= 0) {
+					System.out.println("Você morreu!");
+				}
+			}
+		}
+	}
+	
+	public boolean isColiddingWithPlayer() {
+		Rectangle enemyCurrent = new Rectangle(this.getX() + maskxplayer, this.getY() + maskyplayer,maskwplayer,maskhplayer);
+		Rectangle player = new Rectangle(Game.player.getX(), Game.player.getY(),Game.xyPixelsByTile,Game.xyPixelsByTile);	
+	
+		return enemyCurrent.intersects(player); 	
 	}
 	
 	//Checa se os inimigos estão colidindo
 	public boolean isColidding(int xNext, int yNext) {
-		Rectangle enemyCurrent = new Rectangle(xNext + maskx, yNext + masky,maskw,maskh);
+		Rectangle enemyCurrent = new Rectangle(xNext + maskxenemy, yNext + maskyenemy,maskwenemy,maskhenemy);
 		for (int i = 0; i < Game.enemies.size(); i++) {
 			Enemy e = Game.enemies.get(i);
 			if(e== this) continue;
-			Rectangle targetEnemy = new Rectangle(e.getX() + maskx, e.getY() + masky,maskw,maskh);
+			Rectangle targetEnemy = new Rectangle(e.getX() + maskxenemy, e.getY() + maskyenemy,maskwenemy,maskhenemy);
 			if (enemyCurrent.intersects(targetEnemy)) {
 				return true;		
 			}
@@ -69,7 +88,7 @@ public class Enemy extends Entity {
 		g.drawImage(sprites[index],this.getX() - Camera.x, this.getY() - Camera.y,null);
 	
 		//g.setColor(Color.BLUE);
-		//g.fillRect(this.getX() + maskx - Camera.x, this.getY() + masky - Camera.y, maskw,  maskh);
+		//g.fillRect(this.getX() + maskxenemy - Camera.x, this.getY() + maskyenemy - Camera.y, maskwenemy,  maskhenemy);
 	}
 	}
 
