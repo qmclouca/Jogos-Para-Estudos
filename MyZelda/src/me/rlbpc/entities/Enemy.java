@@ -1,6 +1,5 @@
 package me.rlbpc.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -13,13 +12,18 @@ public class Enemy extends Entity {
 	/*atenuadorDeInimigo1 - Porcentagem da velocidade do player que o inimigo terá, varia de 0 a 1
 	 *atenuadorDeInimigo2 - Randomização da movimentação do inimigo, varia de 0 a 100, tipicamente entre 30 e 70)  
 	 */
-	public static double atenuadorDeInimigo1 = 0.8; 
+	public static double atenuadorDeInimigo1 = 0.4; 
 	private double speed = Player.speed*atenuadorDeInimigo1;
 	//tamanho da máscara de colisão do inimigo
-	private int maskx = 8, masky = 8, maskw = 7, maskh = 8;
-	
+	private int maskx = 8, masky = 8, maskw = 7, maskh = 9;
+	private int frames = 0, index = 0, maxFrames = 20, maxIndex = 1;
+	private BufferedImage[] sprites;
+
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
-		super(x, y, width, height, sprite);
+		super(x, y, width, height, null);
+		sprites = new BufferedImage[2];
+		sprites[0] = Game.spritesheet.getSprite(112, 16, Game.xyPixelsByTile, Game.xyPixelsByTile);
+		sprites[1] = Game.spritesheet.getSprite(128, 16, Game.xyPixelsByTile, Game.xyPixelsByTile);
 	}
 	
 	public void tick() {
@@ -38,6 +42,12 @@ public class Enemy extends Entity {
 					&& !isColidding(this.getX(), (int)(y-speed))) {
 				y-=speed;
 			}
+				frames++;
+				if (frames == maxFrames) {
+					frames = 0;
+					index++;
+					if (index > maxIndex) index = 0;
+				}
 	}
 	
 	//Checa se os inimigos estão colidindo
@@ -54,12 +64,12 @@ public class Enemy extends Entity {
 		
 		return false;
 	}
-	//descomentar para ver a máscara de colisão
-	/*
+	
 	public void render (Graphics g) {
-		super.render(g);
-		g.setColor(Color.BLUE);
-		g.fillRect(this.getX() +maskx - Camera.x, this.getY() + masky - Camera.y, maskw,  maskh);
-	}*/
+		g.drawImage(sprites[index],this.getX() - Camera.x, this.getY() - Camera.y,null);
+	
+		//g.setColor(Color.BLUE);
+		//g.fillRect(this.getX() + maskx - Camera.x, this.getY() + masky - Camera.y, maskw,  maskh);
+	}
 	}
 
