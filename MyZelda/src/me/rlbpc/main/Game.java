@@ -3,6 +3,7 @@ package me.rlbpc.main;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,7 +30,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static final int xyPixelsByTile = 16;
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = 160;
-	private final int SCALE = 3; //Usar o scale para aumentar ou diminuir a janela
+	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
 	private BufferedImage image;
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
@@ -126,6 +127,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		g.dispose(); //limpar dados de imagem otimiza a performance
 		g = bs.getDrawGraphics();
 		g.drawImage(image,0,0,getWIDTH()*SCALE,getHEIGHT()*SCALE,null);
+		g.setFont(new Font("arial", Font.BOLD,17));
+		g.setColor(Color.WHITE);
+		g.drawString((int) Player.life +" / "+(int) Player.maxLife, (int)(WIDTH*SCALE*0.1), (int)(HEIGHT*SCALE*0.065));
+		g.drawString("Munição: " + player.ammo, (int)(WIDTH*SCALE*0.6), (int)(HEIGHT*SCALE*0.065));
 		bs.show();
 		}
 	

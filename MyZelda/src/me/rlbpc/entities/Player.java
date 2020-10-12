@@ -105,7 +105,7 @@ public class Player extends Entity {
 				if(atual instanceof Bullet){
 					if(Entity.isColidding(this, atual)) {
 						ammo += 10;
-						System.out.println("Munição: " + ammo);
+						//System.out.println("Munição: " + ammo);
 						if (life >= 100) life = 100;
 						Game.entities.remove(atual);
 				}
