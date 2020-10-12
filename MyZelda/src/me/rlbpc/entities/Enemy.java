@@ -54,6 +54,7 @@ public class Enemy extends Entity {
 			//código perda de vida
 			if(Game.rand.nextInt(100) < 10) {
 				Game.player.life -= Game.rand.nextInt(4);
+				Game.player.isDamaged = true;
 				System.out.println("Vida: " + Game.player.life);
 				if (Game.player.life <= 0) {
 					System.out.println("Você morreu!");
