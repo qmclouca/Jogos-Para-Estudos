@@ -10,15 +10,23 @@ import me.rlbpc.world.Camera;
 
 public class Entity {
 	public static BufferedImage LIVEPACK_EN = Game.spritesheet.getSprite(96,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
-	public static BufferedImage WEAPON_EN = Game.spritesheet.getSprite(112,0,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage WEAPON_EN= Game.spritesheet.getSprite(46,66,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	public static BufferedImage BULLET_EN = Game.spritesheet.getSprite(97,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(112,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	//usar protected para poder usar nas classes derivadas
 	protected double x,y;
 	protected int width,height;
 	
+	private BufferedImage gun[];
 	private BufferedImage sprite;
 	
+public void enemyLoad() {
+	gun = new BufferedImage[4];
+	for (int i = 0; i<4; i++) {
+		gun[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),16,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	}
+}
+
 public int maskx,masky,mwidth,mheight;
 	
 	public Entity(int x,int y,int width,int height,BufferedImage sprite){

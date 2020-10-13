@@ -25,6 +25,8 @@ public class Player extends Entity {
 	private BufferedImage[] downPlayer;
 	private BufferedImage playerDamage;
 	
+	private boolean hasGun = false;
+	
 	public boolean isDamaged = false;
 	private int damageFrames = 0;
 	
@@ -99,6 +101,7 @@ public class Player extends Entity {
 		}
 	chekCollisionLifePack();
 	chekCollisionAmmo();
+	chekCollisionGun();
 	if(isDamaged) {
 		this.damageFrames++;
 		if (this.damageFrames == 2) {
@@ -122,7 +125,6 @@ public class Player extends Entity {
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
 }
 	
-	
 	public void chekCollisionAmmo(){
 		for (int i = 0; i< Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);
@@ -137,8 +139,18 @@ public class Player extends Entity {
 		}
 	}
 	
-	
-	
+	public void chekCollisionGun(){
+		for (int i = 0; i< Game.entities.size(); i++){
+			Entity atual = Game.entities.get(i);
+				if(atual instanceof Weapon){
+					if(Entity.isColidding(this, atual)) {
+						hasGun = true;
+						//System.out.println("Pegou a arma!");
+						Game.entities.remove(atual);
+				}
+			}
+		}
+	}
 	
 	public void chekCollisionLifePack(){
 		for (int i = 0; i< Game.entities.size(); i++){
@@ -155,14 +167,20 @@ public class Player extends Entity {
 	
 	public void render(Graphics g) {
 		if(!isDamaged) {
-		if(dir == right_dir) {
-			g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+			if(dir == right_dir) {
+				g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				if(hasGun) {
+					//desenha arma para a direita
+				}
 			} else if (dir == left_dir) {
-			g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				if(hasGun) {
+					//desenha arma para a esquerda
+				}
 			} else if (dir == up_dir) {
-			g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 			} else if (dir == down_dir) {
-			g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 			}
 		} else {
 			g.drawImage(playerDamage, this.getX() - Camera.x, this.getY() - Camera.y, null);

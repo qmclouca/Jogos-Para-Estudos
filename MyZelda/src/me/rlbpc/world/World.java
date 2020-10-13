@@ -42,7 +42,9 @@ public class World {
 					break;
 					case 0xFF834900: 
 						//Arma
-						Game.entities.add(new Weapon(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.WEAPON_EN));
+						Weapon arma = new Weapon(xx*Game.xyPixelsByTile,yy*Game.xyPixelsByTile,Game.xyPixelsByTile,Game.xyPixelsByTile,Entity.WEAPON_EN);
+						//arma.setMask(3, 0, 8, 8);
+						Game.entities.add(arma);
 					break;
 					case 0xFF792300:
 						//INIMIGO
