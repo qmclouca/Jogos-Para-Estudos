@@ -15,6 +15,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import me.rlbpc.entities.BulletShoot;
 import me.rlbpc.entities.Enemy;
 import me.rlbpc.entities.Entity;
 import me.rlbpc.entities.Player;
@@ -34,6 +35,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	private BufferedImage image;
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
+	public static List<BulletShoot> bullets;
 	public static SpriteSheet spritesheet;
 	public static World world;
 	public static Player player;
@@ -51,6 +53,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		image = new BufferedImage(getWIDTH(),getHEIGHT(),BufferedImage.TYPE_INT_RGB);
 		entities = new ArrayList<Entity>();
 		enemies = new ArrayList<Enemy>();
+		bullets = new ArrayList<BulletShoot>();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
 		player = new Player(0,0,xyPixelsByTile,xyPixelsByTile,spritesheet.getSprite(32,0,xyPixelsByTile,xyPixelsByTile));
 		entities.add(player);
@@ -101,6 +104,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			Entity e = entities.get(i);
 			e.tick();
 		}
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).tick();
+		}
 	}
 	
 	
@@ -121,6 +127,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.render(g);
+		}
+		for (int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).render(g);
 		}
 		ui.render(g);
 		//APRESENTA A IMAGEM NO FRAME
@@ -194,6 +203,16 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			  System.out.println("Para baixo");
 				player.up = true;
 			    break;
+		  case KeyEvent.VK_CONTROL:
+			  if(Player.hasGun) {
+				  System.out.println("Você está atirando!");
+				  player.isShooting = true;
+			  } else {
+				  System.out.println("Você está desarmado!");
+			  }
+			  	
+			  break;
+		
 		  
 		}
 	}
@@ -212,6 +231,9 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		  case KeyEvent.VK_DOWN:
 			  player.up = false;
 			    break;
+		  case KeyEvent.VK_CONTROL:
+			  player.isShooting = false;
+			  	break;
 		  
 		}
 		

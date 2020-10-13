@@ -11,25 +11,14 @@ import me.rlbpc.world.World;
 
 public class Player extends Entity {
 	
-	public boolean right,up,left,down,upleft,upright,downleft,downright, moved = false;
-	public static double speed = 1.2;
-	public int right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3;
-	public int dir = right_dir, ammo = 0;
-	public static double life = 100, maxLife = 100;
-	
+	public boolean right, up, left, down, upleft, upright, downleft, downright, moved = false, isDamaged = false;
+	public static boolean isShooting = false, hasGun = false; 
+	public static double speed = 1.2, life = 100, maxLife = 100;
+	public int frames = 0, index = 0, maxFrames = 5, maxIndex = 3, right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3, dir = right_dir, damageFrames = 0, ammo = 0;
 	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
-	private int frames = 0, index = 0, maxFrames = 5, maxIndex = 3;
-	private BufferedImage[] rightPlayer;
-	private BufferedImage[] leftPlayer;
-	private BufferedImage[] upPlayer;
-	private BufferedImage[] downPlayer;
+	private BufferedImage[] rightPlayer, leftPlayer, upPlayer, downPlayer;
 	private BufferedImage playerDamage;
-	
-	private boolean hasGun = false;
-	
-	public boolean isDamaged = false;
-	private int damageFrames = 0;
-	
+		
 	public Player(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
@@ -76,19 +65,7 @@ public class Player extends Entity {
 			dir = down_dir;
 			y+=speed;
 		
-		} /*else if (upleft) {
-			x-=speed;
-			y+=speed;
-		} else if (upright) {
-			x+=speed;
-			y+=speed;
-		} else if (downleft) {
-			x-=speed;
-			y-=speed;
-		} else if (downright) {
-			x+=speed;
-			y-=speed;
-		}*/ //para implementação posterior de direções diagonais de movimentação
+		} 
 		
 		//lógica para animar o personagem trocando a sheet a cada 4 frames
 		if (moved) {
@@ -119,6 +96,22 @@ public class Player extends Entity {
 			Game.world = new World("/mapa20x20.png");
 			life = 100;
 			return;
+		}
+		
+		if (isShooting && hasGun && (ammo > 0)) {
+			//Criar bala e atirar
+			int dx = 0;
+			int px = 0;
+			int py = 8;
+			if (dir == right_dir) {
+				px = 3;
+				dx = 1;
+			} else {
+				dx = -1;
+			}
+			BulletShoot bullet = new BulletShoot(this.getX() + px,this.getY() + py, 3, 3, null, dx, 0);
+			Game.bullets.add(bullet);
+			ammo--;
 		}
 	}
 		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
