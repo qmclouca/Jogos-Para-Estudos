@@ -102,6 +102,7 @@ public class Player extends Entity {
 	chekCollisionLifePack();
 	chekCollisionAmmo();
 	chekCollisionGun();
+	LoadGuns();
 	if(isDamaged) {
 		this.damageFrames++;
 		if (this.damageFrames == 2) {
@@ -170,17 +171,23 @@ public class Player extends Entity {
 			if(dir == right_dir) {
 				g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if(hasGun) {
-					//desenha arma para a direita
+					g.drawImage(gun[1],this.getX() - Camera.x+7, this.getY() - Camera.y+5,null);//desenha arma para a direita
 				}
 			} else if (dir == left_dir) {
 				g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
 				if(hasGun) {
-					//desenha arma para a esquerda
+					g.drawImage(gun[2],this.getX() - Camera.x-6, this.getY() - Camera.y+5,null);//desenha arma para a esquerda
 				}
 			} else if (dir == up_dir) {
 				g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				if(hasGun) {
+					g.drawImage(gun[3],this.getX() - Camera.x+2, this.getY()+4 - Camera.y,null);//desenha arma para a esquerda
+				}
 			} else if (dir == down_dir) {
 				g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
+				if(hasGun) {
+					g.drawImage(gun[4],this.getX() - Camera.x+4, this.getY()+6 - Camera.y,null);//desenha arma para a esquerda
+				}
 			}
 		} else {
 			g.drawImage(playerDamage, this.getX() - Camera.x, this.getY() - Camera.y, null);

@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.awt.Canvas"/>
 <fullyQualifiedTypeName name="java.awt.Dimension"/>
-<fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
@@ -15,5 +14,6 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
 <fullyQualifiedTypeName name="me.rlbpc.world.Camera"/>
+<fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="me.rlbpc.main.Game"/>
 </qualifiedTypeNameHistroy>
