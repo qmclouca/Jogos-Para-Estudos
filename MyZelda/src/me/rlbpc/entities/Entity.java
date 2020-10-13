@@ -24,6 +24,8 @@ public void enemyLoad() {
 	gun = new BufferedImage[4];
 	for (int i = 0; i<4; i++) {
 		gun[i] = Game.spritesheet.getSprite(32+(i*Game.xyPixelsByTile),16,Game.xyPixelsByTile,Game.xyPixelsByTile);
+		//sequência direita com sombra [0], direita[1], para esquerda[2], para cima e baixo[3]
+	
 	}
 }
 
