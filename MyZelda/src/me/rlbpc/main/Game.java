@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ import me.rlbpc.graficos.SpriteSheet;
 import me.rlbpc.graficos.UI;
 import me.rlbpc.world.World;
 
-public class Game extends Canvas implements Runnable, KeyListener {
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
 	private Thread thread;
@@ -46,6 +48,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public Game() {
 		rand = new Random();
 		addKeyListener(this);
+		addMouseListener(this);
 		setPreferredSize(new Dimension(getWIDTH() * getSCALE(), getHEIGHT() * getSCALE()));
 		initFrame();
 		//Inicializando Objetos devem obedecer a ordem correta devido ao uso de variáveis estáticas
@@ -107,6 +110,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).tick();
 		}
+		
+		
 	}
 	
 	
@@ -203,7 +208,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			  System.out.println("Para baixo");
 				player.up = true;
 			    break;
-		  case KeyEvent.VK_CONTROL:
+		  case KeyEvent.VK_1:
 			  if(Player.hasGun) {
 				  System.out.println("Você está atirando!");
 				  player.isShooting = true;
@@ -240,6 +245,36 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

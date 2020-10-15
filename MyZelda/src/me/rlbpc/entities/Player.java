@@ -98,7 +98,28 @@ public class Player extends Entity {
 			return;
 		}
 		
-		if (isShooting && hasGun && (ammo > 0)) {
+		if (isShooting) {
+			//Criar bala e atirar
+			isShooting = false;
+			if(hasGun) {
+				if(ammo > 0) {
+			int dx = 0;
+			int px = 0;
+			int py = 8;
+			if (dir == right_dir) {
+				px = 3;
+				dx = 1;
+			} else {
+				dx = -1;
+			}
+			BulletShoot bullet = new BulletShoot(this.getX() + px,this.getY() + py, 3, 3, null, dx, 0);
+			Game.bullets.add(bullet);
+			ammo--;
+				}
+			}
+		}
+		
+		/*if (mouseShoot) {
 			//Criar bala e atirar
 			int dx = 0;
 			int px = 0;
@@ -112,7 +133,8 @@ public class Player extends Entity {
 			BulletShoot bullet = new BulletShoot(this.getX() + px,this.getY() + py, 3, 3, null, dx, 0);
 			Game.bullets.add(bullet);
 			ammo--;
-		}
+			
+		}*/
 	}
 		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
 		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
