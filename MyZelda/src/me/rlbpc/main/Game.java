@@ -30,10 +30,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	public static final int xyPixelsByTile = 16;
-	public static final int WIDTH = 160;
+	public static final int xyPixelsByTile = 16; //pixel em cada bloco de sprite
+	public static final int WIDTH = 240;
 	public static final int HEIGHT = 160;
-	private final int SCALE = 2; //Usar o scale para aumentar ou diminuir a janela
+	private final int SCALE = 3; //Usar o scale para aumentar ou diminuir a janela
 	private BufferedImage image;
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
@@ -93,7 +93,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		Game game = new Game();
 		game.start();
 	}
-/*
+
 	public static JFrame getFrame() {
 		return frame;
 	}
@@ -101,7 +101,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static void setFrame(JFrame frame) {
 		Game.frame = frame;
 	}
-*/
+
 	public void tick() {
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
@@ -110,10 +110,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).tick();
 		}
-		
-		
 	}
-	
 	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
@@ -141,7 +138,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		g.dispose(); //limpar dados de imagem otimiza a performance
 		g = bs.getDrawGraphics();
 		g.drawImage(image,0,0,getWIDTH()*SCALE,getHEIGHT()*SCALE,null);
-		g.setFont(new Font("arial", Font.BOLD,17));
+		g.setFont(new Font("arial", Font.BOLD,20));
 		g.setColor(Color.WHITE);
 		g.drawString((int) Player.life +" / "+(int) Player.maxLife, (int)(WIDTH*SCALE*0.1), (int)(HEIGHT*SCALE*0.065));
 		g.drawString("Munição: " + player.ammo, (int)(WIDTH*SCALE*0.6), (int)(HEIGHT*SCALE*0.065));
@@ -194,7 +191,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch(e.getKeyCode()) {
 		  case KeyEvent.VK_UP:
 			  System.out.println("Para cima");
-				player.down = true;
+				player.up = true;
 		    break;
 		  case KeyEvent.VK_RIGHT:
 			  System.out.println("Direita");
@@ -206,15 +203,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			    break;
 		  case KeyEvent.VK_DOWN:
 			  System.out.println("Para baixo");
-				player.up = true;
+				player.down = true;
 			    break;
-		  case KeyEvent.VK_1:
-			  if(Player.hasGun) {
+		  case KeyEvent.VK_CONTROL:
+			 // if(Player.hasGun) {
 				  System.out.println("Você está atirando!");
-				  player.isShooting = true;
-			  } else {
-				  System.out.println("Você está desarmado!");
-			  }
+				  player.shoot = true;
+			 // } else {
+			//	  System.out.println("Você está desarmado!");
+			//  }
 			  	
 			  break;
 		
@@ -225,7 +222,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		  case KeyEvent.VK_UP:
-			  player.down = false;
+			  player.up = false;
 		    break;
 		  case KeyEvent.VK_RIGHT:
 			  player.right = false;
@@ -234,10 +231,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			  player.left = false;
 			    break;
 		  case KeyEvent.VK_DOWN:
-			  player.up = false;
+			  player.down = false;
 			    break;
 		  case KeyEvent.VK_CONTROL:
-			  player.isShooting = false;
+			  player.shoot = false;
 			  	break;
 		  
 		}
@@ -269,7 +266,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		player.mouseShoot = true;
 		
 	}
 

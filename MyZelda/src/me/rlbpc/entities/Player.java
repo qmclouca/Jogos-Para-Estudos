@@ -2,27 +2,40 @@ package me.rlbpc.entities;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import me.rlbpc.graficos.SpriteSheet;
 import me.rlbpc.main.Game;
 import me.rlbpc.world.Camera;
 import me.rlbpc.world.World;
 
-public class Player extends Entity {
+public class Player extends Entity{
 	
-	public boolean right, up, left, down, upleft, upright, downleft, downright, moved = false, isDamaged = false;
-	public static boolean isShooting = false, hasGun = false; 
-	public static double speed = 1.2, life = 100, maxLife = 100;
-	public int frames = 0, index = 0, maxFrames = 5, maxIndex = 3, right_dir = 0, left_dir = 1, up_dir = 2, down_dir = 3, dir = right_dir, damageFrames = 0, ammo = 0;
-	//a cada 5 frames muda o sheet do personagem, neste caso são 4 desenhos para direita e quatro para a esqueda e também para cima e para baixo
-	private BufferedImage[] rightPlayer, leftPlayer, upPlayer, downPlayer;
+	public boolean right,up,left,down;
+	public int right_dir = 0,left_dir = 1, up_dir = 2, down_dir = 3;
+	public int dir = right_dir;
+	public static double speed = 1.4;
+	
+	private int frames = 0,maxFrames = 5,index = 0,maxIndex = 3;
+	private boolean moved = false;
+	private BufferedImage[] rightPlayer;
+	private BufferedImage[] leftPlayer;
+	
 	private BufferedImage playerDamage;
-		
+	private BufferedImage[] upPlayer, downPlayer;
+	private boolean arma = false;
+	
+	public int ammo = 0;
+	
+	public boolean isDamaged = false;
+	private int damageFrames = 0;
+	
+	public boolean shoot = false,mouseShoot = false;
+	
+	public static double life = 100,maxLife=100;
+	public int mx,my;
+
 	public Player(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
-		//Carregar as sprites para animação do player
 		rightPlayer = new BufferedImage[4];
 		leftPlayer = new BufferedImage[4];
 		upPlayer = new BufferedImage[4];
@@ -42,170 +55,190 @@ public class Player extends Entity {
 		}
 	}
 	
-	public void tick() {
+	public void tick(){
+		LoadGuns();
 		moved = false;
-			
-		if (right && World.isFree((int)(x+speed),this.getY())) {
+		if(right && World.isFree((int)(x+speed),this.getY())) {
 			moved = true;
 			dir = right_dir;
 			x+=speed;
-		} 
-		if (left && World.isFree((int)(x-speed),this.getY())) {
+		}
+		else if(left && World.isFree((int)(x-speed),this.getY())) {
 			moved = true;
 			dir = left_dir;
 			x-=speed;
-		} 
-		if (down && World.isFree(this.getX(),(int)(y-speed))) {
+		}
+		if(up && World.isFree(this.getX(),(int)(y-speed))){
 			moved = true;
-			dir = up_dir;
 			y-=speed;
-		} 
-		if (up && World.isFree(this.getX(),(int)(y+speed))) {
+		}
+		else if(down && World.isFree(this.getX(),(int)(y+speed))){
 			moved = true;
-			dir = down_dir;
 			y+=speed;
+		}
 		
-		} 
-		
-		//lógica para animar o personagem trocando a sheet a cada 4 frames
-		if (moved) {
+		if(moved) {
 			frames++;
-			if (frames == maxFrames) {
+			if(frames == maxFrames) {
 				frames = 0;
 				index++;
-				if (index > maxIndex) index = 0;
+				if(index > maxIndex)
+					index = 0;
 			}
 		}
-	chekCollisionLifePack();
-	chekCollisionAmmo();
-	chekCollisionGun();
-	LoadGuns();
-	if(isDamaged) {
-		this.damageFrames++;
-		if (this.damageFrames == 2) {
-			this.damageFrames = 0;
-			isDamaged = false;
-		}
 		
-		if (life <= 0) {
-			Game.entities = new ArrayList<Entity>();
-			Game.enemies = new ArrayList<Enemy>();
-			Game.spritesheet = new SpriteSheet("/SpriteSheet.png");
-			Game.player = new Player(0,0,Game.xyPixelsByTile,Game.xyPixelsByTile,Game.spritesheet.getSprite(32,0,Game.xyPixelsByTile,Game.xyPixelsByTile));
-			Game.entities.add(Game.player);
-			Game.world = new World("/mapa20x20.png");
-			life = 100;
-			return;
-		}
+		checkCollisionLifePack();
+		checkCollisionAmmo();
+		checkCollisionGun();
 		
-		if (isShooting) {
-			//Criar bala e atirar
-			isShooting = false;
-			if(hasGun) {
-				if(ammo > 0) {
-			int dx = 0;
-			int px = 0;
-			int py = 8;
-			if (dir == right_dir) {
-				px = 3;
-				dx = 1;
-			} else {
-				dx = -1;
+		if(isDamaged) {
+			this.damageFrames++;
+			if(this.damageFrames == 8) {
+				this.damageFrames = 0;
+				isDamaged = false;
 			}
-			BulletShoot bullet = new BulletShoot(this.getX() + px,this.getY() + py, 3, 3, null, dx, 0);
-			Game.bullets.add(bullet);
+		}
+		
+		if(shoot) {
+			shoot = false;
+			if(arma && ammo > 0) {
 			ammo--;
-				}
-			}
-		}
-		
-		/*if (mouseShoot) {
-			//Criar bala e atirar
-			int dx = 0;
-			int px = 0;
-			int py = 8;
-			if (dir == right_dir) {
-				px = 3;
-				dx = 1;
-			} else {
-				dx = -1;
-			}
-			BulletShoot bullet = new BulletShoot(this.getX() + px,this.getY() + py, 3, 3, null, dx, 0);
-			Game.bullets.add(bullet);
-			ammo--;
+			//Criar bala e atirar!
 			
+			int dx = 0;
+			int px = 0;
+			int py = 6;
+			if(dir == right_dir) {
+				px = 18;
+				dx = 1;
+			}else {
+				px = -8;
+				dx = -1;
+			}
+			
+			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,dx,0);
+			Game.bullets.add(bullet);
+			}
+		}
+		
+		if(mouseShoot) {
+			
+			mouseShoot = false;
+			
+			
+			if(arma && ammo > 0) {
+			ammo--;
+			//Criar bala e atirar!
+
+			int px = 0,py = 8;
+			double angle = 0;
+			if(dir == right_dir) {
+				px = 18;
+				angle = Math.atan2(my - (this.getY()+py - Camera.y),mx - (this.getX()+px - Camera.x));
+			}else {
+				px = -8;
+				angle = Math.atan2(my - (this.getY()+py - Camera.y),mx - (this.getX()+px - Camera.x));
+			}
+			
+			double dx = Math.cos(angle);
+			double dy = Math.sin(angle);
+			
+			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,(int)dx,(int)dy);
+			Game.bullets.add(bullet);
+			}
+		}
+		
+		
+	/*	if(life<=0) {
+			//Game over!
+			life = 0;
+			Game.gameState = "GAME_OVER";
 		}*/
-	}
-		//Código para a câmera acompanhar o jogador e no meio da tela e não aparecer espaço fora do mapa (parte escura sem mapa)(Método Clamp)
-		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2), 0, World.WIDTH*Game.xyPixelsByTile - Game.WIDTH);
-		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2), 0, World.HEIGHT*Game.xyPixelsByTile - Game.HEIGHT);
-}
+		
+		updateCamera();
 	
-	public void chekCollisionAmmo(){
-		for (int i = 0; i< Game.entities.size(); i++){
+	}
+	
+	public void updateCamera() {
+		Camera.x = Camera.clamp(this.getX() - (Game.WIDTH/2),0,World.WIDTH*16 - Game.WIDTH);
+		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2),0,World.HEIGHT*16 - Game.HEIGHT);
+	}
+	
+	public void checkCollisionGun() {
+		for(int i = 0; i < Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);
-				if(atual instanceof Bullet){
-					if(Entity.isColidding(this, atual)) {
-						ammo += 10;
-						//System.out.println("Munição: " + ammo);
-						if (life >= 100) life = 100;
-						Game.entities.remove(atual);
+			if(atual instanceof Weapon) {
+				if(Entity.isColidding(this, atual)) {
+					arma = true;
+					//System.out.println("Pegou a arma!");
+			
+					Game.entities.remove(atual);
 				}
 			}
 		}
 	}
 	
-	public void chekCollisionGun(){
-		for (int i = 0; i< Game.entities.size(); i++){
+	public void checkCollisionAmmo() {
+		for(int i = 0; i < Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);
-				if(atual instanceof Weapon){
-					if(Entity.isColidding(this, atual)) {
-						hasGun = true;
-						//System.out.println("Pegou a arma!");
-						Game.entities.remove(atual);
+			if(atual instanceof Bullet) {
+				if(Entity.isColidding(this, atual)) {
+					ammo+=1000;
+					//System.out.println("Municao atual:" + ammo);
+					Game.entities.remove(atual);
 				}
 			}
 		}
 	}
 	
-	public void chekCollisionLifePack(){
-		for (int i = 0; i< Game.entities.size(); i++){
+	public void checkCollisionLifePack(){
+		for(int i = 0; i < Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);
-				if(atual instanceof LifePack){
-					if(Entity.isColidding(this, atual)) {
-						life += 10;
-						if (life >= 100) life = 100;
-						Game.entities.remove(atual);
+			if(atual instanceof LifePack) {
+				if(Entity.isColidding(this, atual)) {
+					life+=10;
+					if(life > 100)
+						life = 100;
+					Game.entities.remove(atual);
 				}
 			}
 		}
 	}
+
 	
 	public void render(Graphics g) {
 		if(!isDamaged) {
 			if(dir == right_dir) {
 				g.drawImage(rightPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
-				if(hasGun) {
+				if(arma) {
 					g.drawImage(gun[1],this.getX() - Camera.x+7, this.getY() - Camera.y+5,null);//desenha arma para a direita
 				}
-			} else if (dir == left_dir) {
+			}else if(dir == left_dir) {
 				g.drawImage(leftPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
-				if(hasGun) {
+				if(arma) {
 					g.drawImage(gun[2],this.getX() - Camera.x-6, this.getY() - Camera.y+5,null);//desenha arma para a esquerda
 				}
 			} else if (dir == up_dir) {
 				g.drawImage(upPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
-				if(hasGun) {
+				if(arma) {
 					g.drawImage(gun[3],this.getX() - Camera.x+2, this.getY()+4 - Camera.y,null);//desenha arma para a esquerda
 				}
 			} else if (dir == down_dir) {
 				g.drawImage(downPlayer[index], this.getX() - Camera.x, this.getY() - Camera.y, null);
-				if(hasGun) {
+				if(arma) {
 					g.drawImage(gun[4],this.getX() - Camera.x+4, this.getY()+6 - Camera.y,null);//desenha arma para a esquerda
 				}
 			}
-		} else {
-			g.drawImage(playerDamage, this.getX() - Camera.x, this.getY() - Camera.y, null);
+		}else {
+			g.drawImage(playerDamage, this.getX()-Camera.x, this.getY() - Camera.y,null);
+			if(arma) {
+				/*if(dir == left_dir) {
+					g.drawImage(Entity.GUN_DAMAGE_LEFT, this.getX()-8 - Camera.x,this.getY() - Camera.y, null);
+				}else {
+					g.drawImage(Entity.GUN_DAMAGE_RIGHT, this.getX()+8 - Camera.x,this.getY() - Camera.y, null);
+				}*/
+			}
 		}
 	}
+
 }

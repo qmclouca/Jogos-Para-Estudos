@@ -70,12 +70,12 @@ public class Enemy extends Entity {
 		return enemyCurrent.intersects(player); 	
 	}
 	
-	//Checa se os inimigos estão colidindo
+	//Checa se os inimigos estão colidindo entre si
 	public boolean isColidding(int xNext, int yNext) {
 		Rectangle enemyCurrent = new Rectangle(xNext + maskxenemy, yNext + maskyenemy,maskwenemy,maskhenemy);
 		for (int i = 0; i < Game.enemies.size(); i++) {
 			Enemy e = Game.enemies.get(i);
-			if(e== this) continue;
+			if(e == this) continue;
 			Rectangle targetEnemy = new Rectangle(e.getX() + maskxenemy, e.getY() + maskyenemy,maskwenemy,maskhenemy);
 			if (enemyCurrent.intersects(targetEnemy)) {
 				return true;		
