@@ -70,10 +70,12 @@ public class Player extends Entity{
 		}
 		if(up && World.isFree(this.getX(),(int)(y-speed))){
 			moved = true;
+			dir = up_dir;
 			y-=speed;
 		}
 		else if(down && World.isFree(this.getX(),(int)(y+speed))){
 			moved = true;
+			dir = down_dir;
 			y+=speed;
 		}
 		
@@ -106,17 +108,34 @@ public class Player extends Entity{
 			//Criar bala e atirar!
 			
 			int dx = 0;
+			int dy = 0;
 			int px = 0;
 			int py = 6;
 			if(dir == right_dir) {
-				px = 18;
+				px = 14;
+				py = 8;
 				dx = 1;
-			}else {
-				px = -8;
-				dx = -1;
+				dy = 0;
 			}
-			
-			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,dx,0);
+			if(dir == left_dir) {
+				px = -2;
+				py = 8;
+				dx = -1;
+				dy = 0;
+			}
+			if(dir == up_dir) {
+				px = 11;
+				py = 6;
+				dx = 0;
+				dy = -1;
+			}
+			if(dir == down_dir) {
+				px = 10;
+				py = 12;
+				dx = 0;
+				dy = 1;
+			}
+			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,dx,dy);
 			Game.bullets.add(bullet);
 			}
 		}
