@@ -17,8 +17,10 @@ public class Enemy extends Entity {
 	//tamanho da máscara de colisão do inimigo
 	private int maskxenemy = 8, maskyenemy = 8, maskwenemy = 7, maskhenemy = 8; //ajuste do tamanho da máscara de colisão do inimigo
 	private int maskxplayer = 8, maskyplayer = 8, maskwplayer = 6, maskhplayer = 8; //ajuste do tamanho da máscara de colisão do player
-	private int frames = 0, index = 0, maxFrames = 20, maxIndex = 1;
+	private int frames = 0, index = 0, maxFrames = 20, maxIndex = 1, life = 10;
 	private BufferedImage[] sprites;
+	
+
 	
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, null);
@@ -50,6 +52,8 @@ public class Enemy extends Entity {
 					index++;
 					if (index > maxIndex) index = 0;
 				}
+				
+				
 		} else {
 			//código perda de vida
 			if(Game.rand.nextInt(100) < 10) {
@@ -58,6 +62,25 @@ public class Enemy extends Entity {
 				System.out.println("Vida: " + Game.player.life);
 				if (Game.player.life <= 0) {
 					System.out.println("Você morreu!");
+				}
+			}
+		}
+		collidingBullet();
+		if(life <= 0) destroySelf();
+	}
+	
+	public void destroySelf() {
+		Game.entities.remove(this);
+		
+	}
+	public void collidingBullet() {
+		for(int i=0; i<Game.bullets.size();i++) {
+			Entity e = Game.bullets.get(i);
+			if(e instanceof BulletShoot) {
+				if(Entity.isColidding(this, e)) {
+					life--;
+					Game.bullets.remove(i);
+					return;
 				}
 			}
 		}
