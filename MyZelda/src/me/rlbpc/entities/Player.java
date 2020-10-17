@@ -158,7 +158,7 @@ public class Player extends Entity{
 					py = 8;
 					dx = 1;
 					dy = 0;
-					angle = (Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
@@ -167,7 +167,7 @@ public class Player extends Entity{
 					py = 8;
 					dx = -1;
 					dy = 0;
-					angle = (Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
@@ -176,7 +176,7 @@ public class Player extends Entity{
 					py = 6;
 					dx = 0;
 					dy = -1;
-					angle = (Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
@@ -185,7 +185,7 @@ public class Player extends Entity{
 					py = 12;
 					dx = 0;
 					dy = 1;
-					angle = (Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
