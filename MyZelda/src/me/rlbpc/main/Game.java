@@ -23,6 +23,7 @@ import me.rlbpc.entities.Entity;
 import me.rlbpc.entities.Player;
 import me.rlbpc.graficos.SpriteSheet;
 import me.rlbpc.graficos.UI;
+import me.rlbpc.world.Camera;
 import me.rlbpc.world.World;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
@@ -267,7 +268,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	@Override
 	public void mousePressed(MouseEvent e) {
 		player.mouseShoot = true;
-		
+		player.mx = (e.getX() / SCALE);
+		player.my = (e.getY() / SCALE);
+		//System.out.println(player.mx);
+		//System.out.println(player.my);
 	}
 
 	@Override

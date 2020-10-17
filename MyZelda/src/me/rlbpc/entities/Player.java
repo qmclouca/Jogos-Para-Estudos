@@ -141,30 +141,57 @@ public class Player extends Entity{
 		}
 		
 		if(mouseShoot) {
-			
+			//System.out.println("Atirou com o mouse!");
 			mouseShoot = false;
-			
-			
-			if(arma && ammo > 0) {
-			ammo--;
-			//Criar bala e atirar!
-
-			int px = 0,py = 8;
 			double angle = 0;
-			if(dir == right_dir) {
-				px = 18;
-				angle = Math.atan2(my - (this.getY()+py - Camera.y),mx - (this.getX()+px - Camera.x));
-			}else {
-				px = -8;
-				angle = Math.atan2(my - (this.getY()+py - Camera.y),mx - (this.getX()+px - Camera.x));
-			}
-			
-			double dx = Math.cos(angle);
-			double dy = Math.sin(angle);
-			
-			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,(int)dx,(int)dy);
-			Game.bullets.add(bullet);
-			}
+			if(arma && ammo > 0) {
+				ammo--;
+				
+				//Criar bala e atirar!
+				
+				int dx = 0;
+				int dy = 0;
+				int px = 0;
+				int py = 6;
+				if(dir == right_dir) {
+					px = 14;
+					py = 8;
+					dx = 1;
+					dy = 0;
+					angle = -Math.toDegrees(Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					if (angle < 0) angle = 360+angle;
+					//System.out.println("ângulo de tiro:" + angle);
+				}
+				if(dir == left_dir) {
+					px = -2;
+					py = 8;
+					dx = -1;
+					dy = 0;
+					angle = -Math.toDegrees(Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					if (angle < 0) angle = 360+angle;
+					//System.out.println("ângulo de tiro:" + angle);
+				}
+				if(dir == up_dir) {
+					px = 11;
+					py = 6;
+					dx = 0;
+					dy = -1;
+					angle = -Math.toDegrees(Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					if (angle < 0) angle = 360+angle;
+					//System.out.println("ângulo de tiro:" + angle);
+				}
+				if(dir == down_dir) {
+					px = 10;
+					py = 12;
+					dx = 0;
+					dy = 1;
+					angle = -Math.toDegrees(Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x)));
+					if (angle < 0) angle = 360+angle;
+					//System.out.println("ângulo de tiro:" + angle);
+				}
+				BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,dx,dy);
+				Game.bullets.add(bullet);
+				}
 		}
 		
 		

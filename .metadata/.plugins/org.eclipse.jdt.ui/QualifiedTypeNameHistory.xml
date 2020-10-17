@@ -9,11 +9,12 @@
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="me.rlbpc.entities.Entity"/>
-<fullyQualifiedTypeName name="me.rlbpc.world.World"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
-<fullyQualifiedTypeName name="me.rlbpc.world.Camera"/>
 <fullyQualifiedTypeName name="java.awt.Font"/>
 <fullyQualifiedTypeName name="me.rlbpc.main.Game"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="me.rlbpc.graficos.SpriteSheet"/>
+<fullyQualifiedTypeName name="me.rlbpc.world.Camera"/>
+<fullyQualifiedTypeName name="me.rlbpc.world.World"/>
 </qualifiedTypeNameHistroy>
