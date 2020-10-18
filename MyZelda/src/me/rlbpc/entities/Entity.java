@@ -13,6 +13,7 @@ public class Entity {
 	public static BufferedImage WEAPON_EN= Game.spritesheet.getSprite(46,66,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	public static BufferedImage BULLET_EN = Game.spritesheet.getSprite(97,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	public static BufferedImage ENEMY_EN = Game.spritesheet.getSprite(112,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
+	public static BufferedImage ENEMY_FEEDBACK = Game.spritesheet.getSprite(144,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	//usar protected para poder usar nas classes derivadas
 	protected double x,y;
 	protected int width,height;

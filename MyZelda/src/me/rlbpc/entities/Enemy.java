@@ -19,7 +19,8 @@ public class Enemy extends Entity {
 	private int maskxplayer = 8, maskyplayer = 8, maskwplayer = 6, maskhplayer = 8; //ajuste do tamanho da máscara de colisão do player
 	private int frames = 0, index = 0, maxFrames = 20, maxIndex = 1, life = 10;
 	private BufferedImage[] sprites;
-	
+	private boolean isDamaged = false;
+	private int damagedFrames = 10, damageCurrent = 0;
 
 	
 	public Enemy(int x, int y, int width, int height, BufferedImage sprite) {
@@ -66,7 +67,17 @@ public class Enemy extends Entity {
 			}
 		}
 		collidingBullet();
-		if(life <= 0) destroySelf();
+		if(life <= 0) {
+			destroySelf();
+			return;
+		}
+		if(isDamaged) {
+			this.damageCurrent++;
+			if(this.damageCurrent == this.damagedFrames) {
+				this.damageCurrent = 0;
+				this.isDamaged = false;
+			}
+		}
 	}
 	
 	public void destroySelf() {
@@ -78,6 +89,7 @@ public class Enemy extends Entity {
 			Entity e = Game.bullets.get(i);
 			if(e instanceof BulletShoot) {
 				if(Entity.isColidding(this, e)) {
+					isDamaged = true;
 					life--;
 					Game.bullets.remove(i);
 					return;
@@ -89,7 +101,6 @@ public class Enemy extends Entity {
 	public boolean isColiddingWithPlayer() {
 		Rectangle enemyCurrent = new Rectangle(this.getX() + maskxplayer, this.getY() + maskyplayer,maskwplayer,maskhplayer);
 		Rectangle player = new Rectangle(Game.player.getX(), Game.player.getY(),Game.xyPixelsByTile,Game.xyPixelsByTile);	
-	
 		return enemyCurrent.intersects(player); 	
 	}
 	
@@ -109,10 +120,11 @@ public class Enemy extends Entity {
 	}
 	
 	public void render (Graphics g) {
-		g.drawImage(sprites[index],this.getX() - Camera.x, this.getY() - Camera.y,null);
-	
-		//g.setColor(Color.BLUE);
-		//g.fillRect(this.getX() + maskxenemy - Camera.x, this.getY() + maskyenemy - Camera.y, maskwenemy,  maskhenemy);
+		if(!isDamaged) {
+			g.drawImage(sprites[index],this.getX() - Camera.x, this.getY() - Camera.y,null);
+		} else if(isDamaged) {
+				g.drawImage(Entity.ENEMY_FEEDBACK,this.getX() - Camera.x, this.getY() - Camera.y,null);
+		}
 	}
-	}
+}
 
