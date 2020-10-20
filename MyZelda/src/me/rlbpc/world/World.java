@@ -3,10 +3,17 @@ package me.rlbpc.world;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import me.rlbpc.entities.*;
+import me.rlbpc.entities.Bullet;
+import me.rlbpc.entities.Enemy;
+import me.rlbpc.entities.Entity;
+import me.rlbpc.entities.LifePack;
+import me.rlbpc.entities.Player;
+import me.rlbpc.entities.Weapon;
+import me.rlbpc.graficos.SpriteSheet;
 import me.rlbpc.main.Game;
 
 public class World {
@@ -95,6 +102,18 @@ public class World {
 				(tiles[x2 + (y2*World.WIDTH)] instanceof WallTile) || 
 				(tiles[x3 + (y3*World.WIDTH)] instanceof WallTile) || 
 				(tiles[x4 + (y4*World.WIDTH)] instanceof WallTile));
+	}
+	
+	public static void restartGame(String level) {
+		Game.entities.clear();
+		Game.enemies.clear();
+		Game.entities = new ArrayList<Entity>();
+		Game.enemies = new ArrayList<Enemy>();
+		Game.spritesheet = new SpriteSheet("/SpriteSheet.png");
+		Game.player = new Player(0,0,Game.xyPixelsByTile,Game.xyPixelsByTile,Game.spritesheet.getSprite(32, 0, Game.xyPixelsByTile, Game.xyPixelsByTile));
+		Game.entities.add(Game.player);
+		Game.world = new World("/"+level);
+		return;
 	}
 	
 	public void render(Graphics g) {

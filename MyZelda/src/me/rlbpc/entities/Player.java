@@ -197,11 +197,11 @@ public class Player extends Entity{
 		}
 		
 		
-	/*	if(life<=0) {
+		if(life<=0) {
 			//Game over!
-			life = 0;
-			Game.gameState = "GAME_OVER";
-		}*/
+			//life = 0;
+			//Game.gameState = "GAME_OVER";
+		}
 		
 		updateCamera();
 	
