@@ -165,7 +165,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		bs.show();
 	}
 	
-	public void run() {
+	public static void run() {
 		long lastTime = System.nanoTime();
 		double amountOfTicks=60.0; //FPS rate
 		double ns = 1000000000 / amountOfTicks;
@@ -248,6 +248,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 				  String newWorld = "level"+CUR_LEVEL+".png";
 				  World.restartGame(newWorld);	  
 				  updateCamera();
+				  
 				  }
 			  break;
 			  
