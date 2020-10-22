@@ -31,11 +31,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
 	private Thread thread;
-	private boolean isRunning = true;
+	private boolean isRunning = true, showMessageGameOver = true, restartGame = false;
 	private final int SCALE = 3; 
 	private BufferedImage image;
-	private int CUR_LEVEL = 1, MAX_LEVEL = 2;
-
+	private int CUR_LEVEL = 1, MAX_LEVEL = 2, framesGameOver = 0;
+		
 	public static final int xyPixelsByTile = 16, WIDTH = 240, HEIGHT = 160; //xyPixelBy
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
@@ -105,6 +105,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	public void tick() {
 		if(gameState == "NORMAL") {
+			this.restartGame = false;
 			for(int i =0; i< entities.size();i++) {
 				Entity e = entities.get(i);
 				e.tick();
@@ -123,10 +124,29 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			World.restartGame(newWorld);
 		}
 		} else if (gameState == "GAME_OVER" ) {
+			this.framesGameOver++;
+			if(this.framesGameOver == 30) {
+				this.framesGameOver = 0;
+				if(this.showMessageGameOver)
+					this.showMessageGameOver = false;
+					else
+						this.showMessageGameOver = true;
+				
+			}
 			System.out.println("Game Over");
+			if(restartGame) {
+				this.restartGame = false;
+				this.gameState = "NORMAL";
+				CUR_LEVEL = 1;
+				player.life = 100;
+				player.ammo = 0;
+				String newWorld = "level"+CUR_LEVEL+".png";
+				World.restartGame(newWorld);	  
+				updateCamera();
+					   }
+			}	
 		}
-	}
-	
+		
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
@@ -160,12 +180,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			g.setFont(new Font("arial", Font.BOLD,28));
 			g.setColor(Color.WHITE);
 			g.drawString("Game Over!",(WIDTH*SCALE/2)-70,HEIGHT*SCALE/2);
-			g.drawString("Pressione Enter para reiniciar.",(WIDTH*SCALE/2)-200,(HEIGHT*SCALE/2)+30);
+			if(showMessageGameOver) 
+				g.drawString("Pressione Enter para reiniciar.",(WIDTH*SCALE/2)-200,(HEIGHT*SCALE/2)+30);
 		}
 		bs.show();
 	}
 	
-	public static void run() {
+	public void run() {
 		long lastTime = System.nanoTime();
 		double amountOfTicks=60.0; //FPS rate
 		double ns = 1000000000 / amountOfTicks;
@@ -237,19 +258,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			 // } else {
 			//	  System.out.println("Você está desarmado!");
 			//  }
-			 
-			  break;
+				break;
 		  case KeyEvent.VK_ENTER:
-			  if (gameState == "GAME_OVER") {
-				  CUR_LEVEL = 1;
-				  player.life = 100;
-				  player.ammo = 0;
-				  gameState = "Normal";
-				  String newWorld = "level"+CUR_LEVEL+".png";
-				  World.restartGame(newWorld);	  
-				  updateCamera();
-				  
-				  }
+			  this.restartGame = true;
 			  break;
 			  
 		}
