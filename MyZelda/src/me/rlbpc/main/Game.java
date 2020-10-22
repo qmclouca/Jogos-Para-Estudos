@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -31,12 +32,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true;
-	public static final int xyPixelsByTile = 16; //pixel em cada bloco de sprite
-	public static final int WIDTH = 240;
-	public static final int HEIGHT = 160;
-	private final int SCALE = 3; //Usar o scale para aumentar ou diminuir a janela
+	private final int SCALE = 3; 
 	private BufferedImage image;
 	private int CUR_LEVEL = 1, MAX_LEVEL = 2;
+
+	public static final int xyPixelsByTile = 16, WIDTH = 240, HEIGHT = 160; //xyPixelBy
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
 	public static List<BulletShoot> bullets;
@@ -44,9 +44,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static World world;
 	public static Player player;
 	public static Random rand;	
-	
+	public static String gameState = "NORMAL";
 	public UI ui; //declara uma ui do tipo UI
-	
+
 	public Game() {
 		rand = new Random();
 		addKeyListener(this);
@@ -63,7 +63,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		player = new Player(0,0,xyPixelsByTile,xyPixelsByTile,spritesheet.getSprite(32,0,xyPixelsByTile,xyPixelsByTile));
 		entities.add(player);
 		world = new World("/level1.png");
-	
 	}
 	
 	public void initFrame() {
@@ -105,10 +104,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	}
 
 	public void tick() {
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			e.tick();
-		}
+		if(gameState == "NORMAL") {
+			for(int i =0; i< entities.size();i++) {
+				Entity e = entities.get(i);
+				e.tick();
+			}
+				
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).tick();
 		}
@@ -116,10 +117,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			//avançar para o próximo nível
 			CUR_LEVEL++;
 			if(CUR_LEVEL > MAX_LEVEL) {
-				CUR_LEVEL =1;
+				CUR_LEVEL = 1;
 			}
 			String newWorld = "level"+CUR_LEVEL+".png";
 			World.restartGame(newWorld);
+		}
+		} else if (gameState == "GAME_OVER" ) {
+			System.out.println("Game Over");
 		}
 	}
 	
@@ -129,14 +133,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			this.createBufferStrategy(3);//usar de 2 a 3
 			return;
 		}
-		Graphics g = image.getGraphics();
-		//PREPARA As IMAGENS PARA SEREM APRESENTADAS
+		Graphics g = image.getGraphics(); //PREPARA As IMAGENS PARA SEREM APRESENTADAS
 		g.setColor(new Color(35,35,0));
 		g.fillRect(0,0,getWIDTH(),getHEIGHT());
-		
-		//Renderização do jogo
-		//Graphics2D g2 = (Graphics2D) g; //casting do g para gráficos 2D
-		world.render(g);
+		world.render(g); //Renderização do jogo //Graphics2D g2 = (Graphics2D) g; //casting do g para gráficos 2D
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			e.render(g);
@@ -153,8 +153,17 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		g.setColor(Color.WHITE);
 		g.drawString((int) Player.life +" / "+(int) Player.maxLife, (int)(WIDTH*SCALE*0.1), (int)(HEIGHT*SCALE*0.065));
 		g.drawString("Munição: " + player.ammo, (int)(WIDTH*SCALE*0.6), (int)(HEIGHT*SCALE*0.065));
-		bs.show();
+		if(gameState == "GAME_OVER") {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setColor(new Color(0,0,0,100));
+			g2.fillRect(0, 0,  WIDTH*SCALE, HEIGHT*SCALE);
+			g.setFont(new Font("arial", Font.BOLD,28));
+			g.setColor(Color.WHITE);
+			g.drawString("Game Over!",(WIDTH*SCALE/2)-70,HEIGHT*SCALE/2);
+			g.drawString("Pressione Enter para reiniciar.",(WIDTH*SCALE/2)-200,(HEIGHT*SCALE/2)+30);
 		}
+		bs.show();
+	}
 	
 	public void run() {
 		long lastTime = System.nanoTime();
@@ -184,6 +193,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		stop(); //segurança para que as threads parem se ocorrer algum problema e liberem os recursos do computador
 	}
 
+	public void updateCamera() {
+		Camera.x = Camera.clamp(player.getX() - (Game.WIDTH/2),0,World.WIDTH*16 - Game.WIDTH);
+		Camera.y = Camera.clamp(player.getY() - (Game.HEIGHT/2),0,World.HEIGHT*16 - Game.HEIGHT);
+	}
+	
 	public int getWIDTH() {
 		return WIDTH;
 	}
@@ -217,16 +231,26 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 				player.down = true;
 			    break;
 		  case KeyEvent.VK_CONTROL:
-			 // if(Player.hasGun) {
+			 // if(Player.arma) {
 				  System.out.println("Você está atirando!");
 				  player.shoot = true;
 			 // } else {
 			//	  System.out.println("Você está desarmado!");
 			//  }
-			  	
+			 
 			  break;
-		
-		  
+		  case KeyEvent.VK_ENTER:
+			  if (gameState == "GAME_OVER") {
+				  CUR_LEVEL = 1;
+				  player.life = 100;
+				  player.ammo = 0;
+				  gameState = "Normal";
+				  String newWorld = "level"+CUR_LEVEL+".png";
+				  World.restartGame(newWorld);	  
+				  updateCamera();
+				  }
+			  break;
+			  
 		}
 	}
 	@Override
@@ -247,7 +271,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		  case KeyEvent.VK_CONTROL:
 			  player.shoot = false;
 			  	break;
-		  
+		  case KeyEvent.VK_ENTER:
+			  break;
 		}
 		
 	}

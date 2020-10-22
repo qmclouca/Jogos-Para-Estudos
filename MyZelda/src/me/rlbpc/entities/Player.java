@@ -9,30 +9,17 @@ import me.rlbpc.world.World;
 
 public class Player extends Entity{
 	
-	public boolean right,up,left,down;
-	public int right_dir = 0,left_dir = 1, up_dir = 2, down_dir = 3;
-	public int dir = right_dir;
-	public static double speed = 1.4;
-	
-	private int frames = 0,maxFrames = 5,index = 0,maxIndex = 3;
-	private boolean moved = false;
-	private BufferedImage[] rightPlayer;
-	private BufferedImage[] leftPlayer;
-	
+	public boolean right,up,left,down, isDamaged = false, shoot = false,
+			       mouseShoot = false;
+	public int right_dir = 0,left_dir = 1, up_dir = 2, down_dir = 3, 
+	           dir = right_dir, ammo = 0, mx, my;
+	public static double speed = 1.3, life = 100, maxLife = 100;
+		
+	private int frames = 0,maxFrames = 5,index = 0,maxIndex = 3, damageFrames = 0;
+	private boolean moved = false, arma = false;
+	private BufferedImage[] rightPlayer, leftPlayer, upPlayer, downPlayer;
 	private BufferedImage playerDamage;
-	private BufferedImage[] upPlayer, downPlayer;
-	private boolean arma = false;
 	
-	public int ammo = 0;
-	
-	public boolean isDamaged = false;
-	private int damageFrames = 0;
-	
-	public boolean shoot = false,mouseShoot = false;
-	
-	public static double life = 100,maxLife=100;
-	public int mx,my;
-
 	public Player(int x, int y, int width, int height, BufferedImage sprite) {
 		super(x, y, width, height, sprite);
 		
@@ -106,34 +93,18 @@ public class Player extends Entity{
 			if(arma && ammo > 0) {
 			ammo--;
 			//Criar bala e atirar!
-			
-			int dx = 0;
-			int dy = 0;
-			int px = 0;
-			int py = 6;
+			int dx = 0, dy = 0, px = 0, py = 6;
 			if(dir == right_dir) {
-				px = 14;
-				py = 8;
-				dx = 1;
-				dy = 0;
+				px = 14; py = 8; dx = 1; dy = 0;
 			}
 			if(dir == left_dir) {
-				px = -2;
-				py = 8;
-				dx = -1;
-				dy = 0;
+				px = -2; py = 8; dx = -1; dy = 0;
 			}
 			if(dir == up_dir) {
-				px = 11;
-				py = 6;
-				dx = 0;
-				dy = -1;
+				px = 11; py = 6; dx = 0; dy = -1;
 			}
 			if(dir == down_dir) {
-				px = 10;
-				py = 12;
-				dx = 0;
-				dy = 1;
+				px = 10; py = 12; dx = 0; dy = 1;
 			}
 			BulletShoot bullet = new BulletShoot(this.getX()+px,this.getY()+py,3,3,null,dx,dy);
 			Game.bullets.add(bullet);
@@ -146,45 +117,28 @@ public class Player extends Entity{
 			double angle = 0;
 			if(arma && ammo > 0) {
 				ammo--;
-				
 				//Criar bala e atirar!
-				
-				double dx = 0;
-				double dy = 0;
-				int px = 0;
-				int py = 6;
+				double dx = 0; double dy = 0; int px = 0; int py = 6;
 				if(dir == right_dir) {
-					px = 14;
-					py = 8;
-					dx = 1;
-					dy = 0;
+					px = 14; py = 8; dx = 1; dy = 0;
 					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
 				if(dir == left_dir) {
-					px = -2;
-					py = 8;
-					dx = -1;
-					dy = 0;
+					px = -2; py = 8; dx = -1; dy = 0;
 					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
 				if(dir == up_dir) {
-					px = 11;
-					py = 6;
-					dx = 0;
-					dy = -1;
+					px = 11; py = 6; dx = 0; dy = -1;
 					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
 				}
 				if(dir == down_dir) {
-					px = 10;
-					py = 12;
-					dx = 0;
-					dy = 1;
+					px = 10; py = 12; dx = 0; dy = 1;
 					angle = Math.atan2(my - (this.getY()+8 - Camera.y),mx - (this.getX()+8 - Camera.x));
 					//if (angle < 0) angle = 360+angle;
 					//System.out.println("ângulo de tiro:" + angle);
@@ -198,9 +152,7 @@ public class Player extends Entity{
 		
 		
 		if(life<=0) {
-			//Game over!
-			//life = 0;
-			//Game.gameState = "GAME_OVER";
+			Game.gameState = "GAME_OVER";
 		}
 		
 		updateCamera();
