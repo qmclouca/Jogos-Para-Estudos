@@ -32,11 +32,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private static JFrame frame;
 	private Thread thread;
 	private boolean isRunning = true, showMessageGameOver = true, restartGame = false;
-	private final int SCALE = 3; 
 	private BufferedImage image;
 	private int CUR_LEVEL = 1, MAX_LEVEL = 2, framesGameOver = 0;
 		
-	public static final int xyPixelsByTile = 16, WIDTH = 240, HEIGHT = 160; //xyPixelBy
+	public static final int xyPixelsByTile = 16, WIDTH = 240, HEIGHT = 160, SCALE = 3; //xyPixelBy
 	public static List<Entity> entities;
 	public static List<Enemy> enemies;
 	public static List<BulletShoot> bullets;
@@ -44,8 +43,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static World world;
 	public static Player player;
 	public static Random rand;	
-	public static String gameState = "NORMAL";
+	public static String gameState = "MENU";
 	public UI ui; //declara uma ui do tipo UI
+	public Menu menu;
 
 	public Game() {
 		rand = new Random();
@@ -59,6 +59,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		entities = new ArrayList<Entity>();
 		enemies = new ArrayList<Enemy>();
 		bullets = new ArrayList<BulletShoot>();
+		menu = new Menu();
 		spritesheet = new SpriteSheet("/SpriteSheet.png");
 		player = new Player(0,0,xyPixelsByTile,xyPixelsByTile,spritesheet.getSprite(32,0,xyPixelsByTile,xyPixelsByTile));
 		entities.add(player);
@@ -133,7 +134,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 						this.showMessageGameOver = true;
 				
 			}
-			System.out.println("Game Over");
+			//System.out.println("Game Over");
 			if(restartGame) {
 				this.restartGame = false;
 				this.gameState = "NORMAL";
@@ -143,10 +144,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 				String newWorld = "level"+CUR_LEVEL+".png";
 				World.restartGame(newWorld);	  
 				updateCamera();
-					   }
-			}	
+			} 
+		} else if (gameState == "MENU") {
+			menu.tick();
 		}
-		
+	}
+	
+	
 	public void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
@@ -182,6 +186,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			g.drawString("Game Over!",(WIDTH*SCALE/2)-70,HEIGHT*SCALE/2);
 			if(showMessageGameOver) 
 				g.drawString("Pressione Enter para reiniciar.",(WIDTH*SCALE/2)-200,(HEIGHT*SCALE/2)+30);
+		} else if(gameState == "MENU") {
+			menu.render(g);
 		}
 		bs.show();
 	}
@@ -238,19 +244,25 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		  case KeyEvent.VK_UP:
 			  System.out.println("Para cima");
 				player.up = true;
-		    break;
+				if(gameState == "MENU") {
+					  menu.up = true;
+				  }
+				break;
 		  case KeyEvent.VK_RIGHT:
 			  System.out.println("Direita");
 			  player.right = true;
 		    break;
 		  case KeyEvent.VK_LEFT:
 			  System.out.println("Esquerda");
-				player.left = true;
-			    break;
+			  player.left = true;
+			 break;
 		  case KeyEvent.VK_DOWN:
 			  System.out.println("Para baixo");
-				player.down = true;
-			    break;
+			  player.down = true;
+			  if(gameState == "MENU") {
+				  menu.down = true;
+			  }
+			 break;
 		  case KeyEvent.VK_CONTROL:
 			 // if(Player.arma) {
 				  System.out.println("Você está atirando!");
@@ -270,6 +282,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch(e.getKeyCode()) {
 		  case KeyEvent.VK_UP:
 			  player.up = false;
+			  if(gameState == "MENU") {
+				  menu.up = false;
+			  }
 		    break;
 		  case KeyEvent.VK_RIGHT:
 			  player.right = false;
@@ -279,6 +294,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 			    break;
 		  case KeyEvent.VK_DOWN:
 			  player.down = false;
+			  if(gameState == "MENU") {
+				  menu.down = false;
+			  }
 			    break;
 		  case KeyEvent.VK_CONTROL:
 			  player.shoot = false;
