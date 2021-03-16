@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import me.rlbpc.main.Game;
+import me.rlbpc.main.Sound;
 import me.rlbpc.world.Camera;
 import me.rlbpc.world.World;
 
@@ -58,6 +59,7 @@ public class Enemy extends Entity {
 		} else {
 			//código perda de vida
 			if(Game.rand.nextInt(100) < 10) {
+				Sound.hurtEffect.play();
 				Game.player.life -= Game.rand.nextInt(4);
 				Game.player.isDamaged = true;
 				System.out.println("Vida: " + Game.player.life);

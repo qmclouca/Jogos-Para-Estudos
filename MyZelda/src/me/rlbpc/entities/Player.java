@@ -165,6 +165,8 @@ public class Player extends Entity{
 		Camera.y = Camera.clamp(this.getY() - (Game.HEIGHT/2),0,World.HEIGHT*16 - Game.HEIGHT);
 	}
 	
+	
+	
 	public void checkCollisionGun() {
 		for(int i = 0; i < Game.entities.size(); i++){
 			Entity atual = Game.entities.get(i);

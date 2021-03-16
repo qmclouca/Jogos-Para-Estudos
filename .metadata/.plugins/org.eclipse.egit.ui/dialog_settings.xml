@@ -6,9 +6,11 @@
 		<item value="bitbucket.org"/>
 	</list>
 	<list key="CommitDialog.authorValues">
+		<item value="qmclouca &lt;qmclouca@gmail.com&gt;"/>
 		<item value="Rodolfo Lucas Bortoluzzi &lt;qmclouca@gmail.com&gt;"/>
 	</list>
 	<list key="CommitDialog.committerValues">
+		<item value="qmclouca &lt;qmclouca@gmail.com&gt;"/>
 		<item value="Rodolfo Lucas Bortoluzzi &lt;qmclouca@gmail.com&gt;"/>
 	</list>
 	<section name="GitImportWizard">
