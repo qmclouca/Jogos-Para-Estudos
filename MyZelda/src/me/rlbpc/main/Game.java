@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static World world;
 	public static Player player;
 	public static Random rand;	
-	public static String gameState = "MENU";
+	public static String gameState = "MENU"; //Usar NORMAL para iniciar na fase 1
 	public UI ui; //declara uma ui do tipo UI
 	public Menu menu;
 
@@ -273,8 +273,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 				break;
 		  case KeyEvent.VK_ENTER:
 			  this.restartGame = true;
+			  if(gameState == "MENU") {
+				  menu.enter = true;
+			  }
 			  break;
-			  
+		  case KeyEvent.VK_ESCAPE:
+			  gameState = "MENU"; //Pausa o game quando precionado ESC 
+			  menu.pause = true;
+			  break;
 		}
 	}
 	@Override

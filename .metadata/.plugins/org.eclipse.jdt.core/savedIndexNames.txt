@@ -1,21 +1,5 @@
-INDEX VERSION 1.131+D:\Rodolfo Bortoluzzi\Eclipse\jogos\.metadata\.plugins\org.eclipse.jdt.core
-4274602762.index
-69757734.index
-1883060495.index
-1631833424.index
+INDEX VERSION 1.131+D:\RodolfoBortoluzzi\Eclipse\jogos\.metadata\.plugins\org.eclipse.jdt.core
 2629531056.index
-1793616930.index
-4261470548.index
-4103631017.index
-1149607114.index
-2553149253.index
-3022346817.index
-3637274678.index
-3122264989.index
-4071255735.index
-1946564855.index
-3688766815.index
-3075760940.index
 2654205660.index
-1376451494.index
-3830390680.index
+3637274678.index
+1793616930.index
