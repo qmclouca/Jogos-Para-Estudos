@@ -59,7 +59,7 @@ public class Enemy extends Entity {
 		} else {
 			//código perda de vida
 			if(Game.rand.nextInt(100) < 10) {
-				Sound.hurtEffect.play();
+				Sound.hurtEffect.play(); //comentar para tirar o som de dano
 				Game.player.life -= Game.rand.nextInt(4);
 				Game.player.isDamaged = true;
 				System.out.println("Vida: " + Game.player.life);

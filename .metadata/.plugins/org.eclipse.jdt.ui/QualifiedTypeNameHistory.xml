@@ -15,10 +15,10 @@
     <fullyQualifiedTypeName name="me.rlbpc.graficos.SpriteSheet"/>
     <fullyQualifiedTypeName name="me.rlbpc.world.Camera"/>
     <fullyQualifiedTypeName name="me.rlbpc.world.World"/>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="me.rlbpc.main.Game"/>
     <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
     <fullyQualifiedTypeName name="java.applet.AudioClip"/>
     <fullyQualifiedTypeName name="java.applet.Applet"/>
     <fullyQualifiedTypeName name="me.rlbpc.main.Sound"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>

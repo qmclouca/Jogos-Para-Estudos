@@ -1,6 +1,3 @@
-/**
- * 
- */
 package me.rlbpc.main;
 
 import java.applet.Applet;
@@ -13,8 +10,9 @@ import java.applet.AudioClip;
 public class Sound {
 	private AudioClip clip;
 	
-	public static final Sound musicBackgroud = new Sound("/background_music.wav");
 	public static final Sound hurtEffect = new Sound("/hurt.wav");
+	public static final Sound musicBackground = new Sound("/P30.wav");
+	
 	private Sound(String name) {
 		try {
 			clip = Applet.newAudioClip(Sound.class.getResource(name));

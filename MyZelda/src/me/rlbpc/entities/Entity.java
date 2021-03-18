@@ -16,7 +16,7 @@ public class Entity {
 	public static BufferedImage ENEMY_FEEDBACK = Game.spritesheet.getSprite(144,16,Game.xyPixelsByTile,Game.xyPixelsByTile);
 	//usar protected para poder usar nas classes derivadas
 	protected double x,y;
-	protected int width,height;
+	protected int width,height, z;
 	
 	protected BufferedImage gun[];
 	private BufferedImage sprite;
@@ -84,8 +84,10 @@ public int maskx,masky,mwidth,mheight;
 	public static boolean isColidding(Entity e1,Entity e2){
 		Rectangle e1Mask = new Rectangle(e1.getX() + e1.maskx,e1.getY()+e1.masky,e1.mwidth,e1.mheight);
 		Rectangle e2Mask = new Rectangle(e2.getX() + e2.maskx,e2.getY()+e2.masky,e2.mwidth,e2.mheight);
-		
-		return e1Mask.intersects(e2Mask);
+		if(e1Mask.intersects(e2Mask) && e1.z == e2.z) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void render(Graphics g) {

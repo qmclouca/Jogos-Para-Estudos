@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public Menu menu;
 
 	public Game() {
-		Sound.musicBackgroud.loop();
+		Sound.musicBackground.play();
 		rand = new Random();
 		addKeyListener(this);
 		addMouseListener(this);
@@ -106,6 +106,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	}
 
 	public void tick() {
+				
 		if(gameState == "NORMAL") {
 			this.restartGame = false;
 			for(int i =0; i< entities.size();i++) {
@@ -281,6 +282,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		  case KeyEvent.VK_ESCAPE:
 			  gameState = "MENU"; //Pausa o game quando precionado ESC 
 			  menu.pause = true;
+			  break;
+		  case KeyEvent.VK_SHIFT:
+			  player.jump = true;
 			  break;
 		}
 	}
