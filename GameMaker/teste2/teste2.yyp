@@ -1,9 +1,11 @@
 {
   "resources": [
     {"id":{"name":"spr_Box","path":"sprites/spr_Box/spr_Box.yy",},"order":1,},
+    {"id":{"name":"Fnt_UI","path":"fonts/Fnt_UI/Fnt_UI.yy",},"order":0,},
     {"id":{"name":"obj_Clown","path":"objects/obj_Clown/obj_Clown.yy",},"order":0,},
     {"id":{"name":"spr_Clown","path":"sprites/spr_Clown/spr_Clown.yy",},"order":0,},
     {"id":{"name":"obj_box","path":"objects/obj_box/obj_box.yy",},"order":1,},
+    {"id":{"name":"Timeline1","path":"timelines/Timeline1/Timeline1.yy",},"order":0,},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},"order":0,},
   ],
   "Options": [

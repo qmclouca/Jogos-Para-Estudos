@@ -10,5 +10,4 @@ if(!place_meeting(x, y+(dy*spd), obj_box)){
 	dy*=-1;
 }
 
-
 image_angle = point_direction(xprevious,yprevious,x,y)
