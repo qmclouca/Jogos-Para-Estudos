@@ -6,3 +6,8 @@ spd = irandom_range (8, 10);
 image_angle = angle;
 
 pontos = 0;
+
+tempo = 0;
+
+alarm[0] = 60;
+
